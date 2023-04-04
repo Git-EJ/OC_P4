@@ -48,31 +48,31 @@
     box-shadow: unset;
   }
 
-  .hero-content {
+  .hero-section__content {
     background: #fff;
     color: #000;
     padding: 20px;
   }
 
-  .hero-content::after {
+  .hero-section__content::after {
     content: unset;
   }
 
-  .hero-content .btn-signup {
+  .hero-section__content .btn-signup {
     display: none;
   }
 
-  .hero-headline {
+  .hero-section__content__headline {
     font-size: 4.5rem;
     white-space: normal;
   }
 
-  .hero-text {
+  .hero-section__content__text {
     width: unset;
     font-size: 1.5rem;
   }
 
-  .hero-img img {
+  .hero-section__img img {
     border-radius: 10px;
     margin-top: 40px;
   }

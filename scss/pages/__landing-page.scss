@@ -5,14 +5,14 @@
 .topnav {
   overflow: hidden;
   margin: 3.5%;
-}
 
-.header-logo {
-  float: left;
-}
+  &__logo {
+    float: left;
+  }
 
-.main-navbar {
-  float: right;
+  &__navbar {
+    float: right;
+  }
 }
 
 .topnav a {
@@ -25,21 +25,21 @@
   text-decoration: none;
   font-size: 20px;
   font-family: Roboto, sans-serif;
+
+  &:hover {
+    background-color: $primary-color;
+    color: #ffffff;
+    border-radius: 15px;
+  }
+
+  &.active {
+    background-color: $primary-color;
+    color: #ffffff;
+    border-radius: 15px;
+  }
 }
 
-.topnav a:hover {
-  background-color: $primary-color;
-  color: #ffffff;
-  border-radius: 15px;
-}
-
-.topnav a.active {
-  background-color: $primary-color;
-  color: #ffffff;
-  border-radius: 15px;
-}
-
-.topnav .icon {
+.topnav .icon {  // without fa fa-bars is display on higher resolutions
   display: none;
 }
   
@@ -59,7 +59,7 @@
   margin-bottom: 10px;
 }
 
-.hero-content {
+.hero-section__content {
   padding: 51px 67px;
   grid-column: span 4;   /* first 4 columns of the grid */
   background: $secondary-color;
@@ -67,45 +67,45 @@
   position: relative;
   text-align: left;
   min-width: 424px;
+
+  &::after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    background: $secondary-color;
+    position: absolute;
+    right: -80px;
+    top: 0;
+  }
+
+  & > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  &__headline {
+    font-size: 6rem;
+    font-weight: normal;
+    white-space: nowrap;
+  }
+
+  &__text {
+    width: 146%;
+    font-weight: normal;
+    margin-top: 57px;
+    padding: 0;
+  } 
 }
 
-.hero-content::after {
-  content: "";
-  width: 100%;
-  height: 100%;
-  background: $secondary-color;
-  position: absolute;
-  right: -80px;
-  top: 0;
-}
-
-.hero-content>* {
-  position: relative;
-  z-index: 1;
-}
-
-.hero-headline {
-  font-size: 6rem;
-  font-weight: normal;
-  white-space: nowrap;
-}
-
-.hero-text {
-  width: 146%;
-  font-weight: normal;
-  margin-top: 57px;
-  padding: 0;
-}
-
-.hero-img {
+.hero-section__img {
   grid-column: span 8;
-}
 
-.hero-img img {
-  width: 100%;
-  height: 100%;
-  display: block;
-  padding: 0;
+  & img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    padding: 0;
+  }
 }
 
 .modal-btn { //btn which displays the form
@@ -118,10 +118,10 @@
   padding: 0.75rem 2.5rem;
   border-radius: 1rem;
   cursor: pointer;
-}
 
-.modal-btn:hover {
-  background: #3876ac;
+  &:hover {
+    background: #3876ac;
+  }
 }
 
 .btn-signup {

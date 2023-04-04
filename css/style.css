@@ -270,12 +270,10 @@ input[data-error]::after {
   overflow: hidden;
   margin: 3.5%;
 }
-
-.header-logo {
+.topnav__logo {
   float: left;
 }
-
-.main-navbar {
+.topnav__navbar {
   float: right;
 }
 
@@ -290,13 +288,11 @@ input[data-error]::after {
   font-size: 20px;
   font-family: Roboto, sans-serif;
 }
-
 .topnav a:hover {
   background-color: #FF001B;
   color: #ffffff;
   border-radius: 15px;
 }
-
 .topnav a.active {
   background-color: #FF001B;
   color: #ffffff;
@@ -319,7 +315,7 @@ input[data-error]::after {
   margin-bottom: 10px;
 }
 
-.hero-content {
+.hero-section__content {
   padding: 51px 67px;
   grid-column: span 4; /* first 4 columns of the grid */
   background: #232323;
@@ -328,8 +324,7 @@ input[data-error]::after {
   text-align: left;
   min-width: 424px;
 }
-
-.hero-content::after {
+.hero-section__content::after {
   content: "";
   width: 100%;
   height: 100%;
@@ -338,30 +333,26 @@ input[data-error]::after {
   right: -80px;
   top: 0;
 }
-
-.hero-content > * {
+.hero-section__content > * {
   position: relative;
   z-index: 1;
 }
-
-.hero-headline {
+.hero-section__content__headline {
   font-size: 6rem;
   font-weight: normal;
   white-space: nowrap;
 }
-
-.hero-text {
+.hero-section__content__text {
   width: 146%;
   font-weight: normal;
   margin-top: 57px;
   padding: 0;
 }
 
-.hero-img {
+.hero-section__img {
   grid-column: span 8;
 }
-
-.hero-img img {
+.hero-section__img img {
   width: 100%;
   height: 100%;
   display: block;
@@ -379,7 +370,6 @@ input[data-error]::after {
   border-radius: 1rem;
   cursor: pointer;
 }
-
 .modal-btn:hover {
   background: #3876ac;
 }
@@ -452,26 +442,26 @@ footer {
     display: block;
     box-shadow: unset;
   }
-  .hero-content {
+  .hero-section__content {
     background: #fff;
     color: #000;
     padding: 20px;
   }
-  .hero-content::after {
+  .hero-section__content::after {
     content: unset;
   }
-  .hero-content .btn-signup {
+  .hero-section__content .btn-signup {
     display: none;
   }
-  .hero-headline {
+  .hero-section__content__headline {
     font-size: 4.5rem;
     white-space: normal;
   }
-  .hero-text {
+  .hero-section__content__text {
     width: unset;
     font-size: 1.5rem;
   }
-  .hero-img img {
+  .hero-section__img img {
     border-radius: 10px;
     margin-top: 40px;
   }
