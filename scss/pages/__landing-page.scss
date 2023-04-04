@@ -1,99 +1,158 @@
 /* Landing Page */
 
-body {
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    background-image: url("background.png");
-    font-family: var(--font-default);
-    font-size: 18px;
-    max-width: 1300px;
-    margin: 0 auto;
-  }
+/* HEADER */
+
+.topnav {
+  overflow: hidden;
+  margin: 3.5%;
+}
+
+.header-logo {
+  float: left;
+}
+
+.main-navbar {
+  float: right;
+}
+
+.topnav a {
+  float: left;
+  display: block;
+  color: #000000;
+  text-align: center;
+  padding: 12px 12px;
+  margin: 5px;
+  text-decoration: none;
+  font-size: 20px;
+  font-family: Roboto, sans-serif;
+}
+
+.topnav a:hover {
+  background-color: $primary-color;
+  color: #ffffff;
+  border-radius: 15px;
+}
+
+.topnav a.active {
+  background-color: $primary-color;
+  color: #ffffff;
+  border-radius: 15px;
+}
+
+.topnav .icon {
+  display: none;
+}
   
-  p {
-    margin-bottom: 0;
-    padding: 0.5vw;
-  }
-  
-  img {
-    padding-right: 1rem;
-  }
-  
-  .topnav {
-    overflow: hidden;
-    margin: 3.5%;
-  }
-  
-  .header-logo {
-    float: left;
-  }
-  
-  .main-navbar {
-    float: right;
-  }
-  
-  .topnav a {
-    float: left;
-    display: block;
-    color: #000000;
-    text-align: center;
-    padding: 12px 12px;
-    margin: 5px;
-    text-decoration: none;
-    font-size: 20px;
-    font-family: Roboto, sans-serif;
-  }
-  
-  .topnav a:hover {
-    background-color: #ff0000;
-    color: #ffffff;
-    border-radius: 15px;
-  }
-  
-  .topnav a.active {
-    background-color: #ff0000;
-    color: #ffffff;
-    border-radius: 15px;
-  }
-  
-  .topnav .icon {
-    display: none;
-  }
-  
-  
-  main {
-    font-size: 130%;
-    font-weight: bolder;
-    color: black;
-    padding-top: 0.5vw;
-    padding-left: 2vw;
-    padding-right: 2vw;
-    margin: 1px 20px 15px;
-    border-radius: 2rem;
-    text-align: justify;
-  
-  
-  }
-  
-  .modal-btn {
-    font-size: 145%;
-    background: #fe142f;
-    display: flex;
-    margin: auto;
-    padding: 2em;
-    color: #fff;
-    padding: 0.75rem 2.5rem;
-    border-radius: 1rem;
-    cursor: pointer;
-  }
-  
-  .modal-btn:hover {
-    background: #3876ac;
-  }
-  
-  .footer {
-    margin: 20px;
-    padding: 10px;
-    font-family: var(--font-slab);
-  }
+
+
+/* custom select end */
+
+/* MAIN */
+
+.hero-section {
+  min-height: 93vh;
+  border-radius: 10px;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr); /*12 columns of the same width, 1fr = fraction of the available space */
+  overflow: hidden;
+  box-shadow: 0 2px 7px 2px rgba(0, 0, 0, 0.2);
+  margin-bottom: 10px;
+}
+
+.hero-content {
+  padding: 51px 67px;
+  grid-column: span 4;   /* first 4 columns of the grid */
+  background: $secondary-color;
+  color: #fff;
+  position: relative;
+  text-align: left;
+  min-width: 424px;
+}
+
+.hero-content::after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  background: $secondary-color;
+  position: absolute;
+  right: -80px;
+  top: 0;
+}
+
+.hero-content>* {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-headline {
+  font-size: 6rem;
+  font-weight: normal;
+  white-space: nowrap;
+}
+
+.hero-text {
+  width: 146%;
+  font-weight: normal;
+  margin-top: 57px;
+  padding: 0;
+}
+
+.hero-img {
+  grid-column: span 8;
+}
+
+.hero-img img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  padding: 0;
+}
+
+.modal-btn { //btn which displays the form
+  font-size: 145%;
+  background: $primary-color;
+  display: flex;
+  margin: auto;
+  padding: 2em;
+  color: #fff;
+  padding: 0.75rem 2.5rem;
+  border-radius: 1rem;
+  cursor: pointer;
+}
+
+.modal-btn:hover {
+  background: #3876ac;
+}
+
+.btn-signup {
+  outline: none;
+  text-transform: capitalize;
+  font-size: 1.3rem;
+  padding: 15px 23px;
+  margin: 0;
+  margin-top: 59px;
+}
+
+.hero-section>.btn-signup { // without there is the 2 buttons (higher and lower resolutions)
+  display: none;
+}
+
+
+
+/* FOOTER */
+
+
+footer {
+  padding-left: 2vw;
+  padding-right: 2vw;
+  margin: 0 20px;
+  font-family: $font-default;
+}
+
+.copyrights {
+  color: $primary-color;
+  padding: 0;
+  font-size: 1rem;
+  margin: 60px 0 30px;
+  font-weight: bolder;
+}

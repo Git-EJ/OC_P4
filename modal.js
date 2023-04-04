@@ -1,3 +1,5 @@
+
+// manages the display of the nav in low resolutions
 function editNav() {
   var x = document.getElementById("myTopnav");
   if (x.className === "topnav") {
