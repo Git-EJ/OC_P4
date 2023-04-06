@@ -65,33 +65,34 @@
       <div class="content">
         <span class="close"></span>
         <div class="modal-body">
+          
           <form name="reserve" action="index.html" method="get" onsubmit="return validate();">
            
             <div class="formData">
               <label for="firstname">Prénom</label>
               <br>
-              <input class="text-control" type="text" id="firstname" name="firstname" minlength="2" required>
+              <input class="text-control" type="text" id="firstname" name="firstname" pattern="[a-zA-ZÀ-ÿ\-]{2,}">
               <br>
             </div>
 
             <div class="formData">
               <label for="lastname">Nom</label>
               <br>
-              <input class="text-control" type="text" id="lastname" name="lastname" minlength="2" required>
+              <input class="text-control" type="text" id="lastname" name="lastname" minlength="2" pattern="[a-zA-ZÀ-ÿ\-]{2,}">
               <br>
             </div>
 
             <div class="formData">
               <label for="email">E-mail</label>
               <br>
-              <input class="text-control" type="email" id="email" name="email" placeholder="exemple@domaine.com" required>
+              <input class="text-control" type="email" id="email" name="email" placeholder="exemple@domaine.com" pattern="[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+.[a-zA-Z.]{2,15}">
               <br>
             </div>
 
             <div class="formData">
               <label for="birthdate">Date de naissance</label>
               <br>
-              <input class="text-control" type="date" id="birthdate" name="birthdate" required>
+              <input class="text-control" type="date" id="birthdate" name="birthdate">
               <br>
             </div>
 
@@ -177,6 +178,10 @@
       Copyright 2014 - 2022, GameOn Inc.
     </p>
   </footer>
+
+<!-- <div class="submitok">
+  <div class="submitok__message">Merci pour votre participation!</div>
+</div> -->
 
   <script src="modal.js"></script>
 
