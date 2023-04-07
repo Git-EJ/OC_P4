@@ -12,6 +12,7 @@ function editNav() {
   }
 }
 
+
 //REGEX ==========================================================
 
 function regexTournament(event) {
@@ -23,15 +24,6 @@ function regexTournament(event) {
     event.target.value = event.target.value.slice(0,2);
   }
 }
-
-
-
-
-
-
-
-
-
 
 
 
@@ -73,7 +65,7 @@ function doIt(data) {
       if (name.length!==name1.length) {
         e.target.value = name1
       }
-    });
+    })
   }
   
   
@@ -126,17 +118,27 @@ function doIt(data) {
     })
   }
   
+  
   //Validation of the birthdate field
-
-
-
-
+  
+  
+  
+  
   
   //Validation of the tournament field
-
+  
   function validateElementTournament(inputFieldName, entryError) {
     if(inputFieldName.validity.valueMissing){
       inputFieldName.setCustomValidity(entryError.required_field);
+      
+      inputFieldName.addEventListener('input', function() {
+
+        const tournamentValue = document.getElementById('tournament-quantity').value;
+
+        if (tournamentValue.length > 0) {  //without this condition, the error message is displayed when the field is empty or not empty
+          inputFieldName.setCustomValidity("");
+        }
+      })
     }
   }
 
@@ -148,7 +150,7 @@ function doIt(data) {
 
 
   //FIRSTNAME FIELD ===========================================================
-  //modal firstname error message
+  //modal firstname error messages
   const firstname = document.getElementById('firstname');
   validateElementsName(firstname, error_message);
   hyphenFirstandLastNameManager(firstname);
@@ -156,7 +158,7 @@ function doIt(data) {
 
   
   //LASTNAME FIELD ===========================================================
-  //modal lastname error message
+  //modal lastname error messages
   const lastname = document.getElementById('lastname');
   validateElementsName(lastname, error_message)
   hyphenFirstandLastNameManager(lastname);
@@ -166,7 +168,7 @@ function doIt(data) {
   //EMAIL FIELD ===========================================================
   // modal email error message
   const email = document.getElementById('email');
-  validateElementEmail(email, error_message)
+  validateElementEmail(email, error_message);
 
 
   //BIRTHDATE FIELD ===========================================================
@@ -174,10 +176,11 @@ function doIt(data) {
   
 
 
-  //TOURNAMENTS FIELD ===========================================================
+  //TOURNAMENT FIELD ===========================================================
   //modal tournament error message
   const tournament = document.getElementById('tournament-quantity');
   validateElementTournament(tournament, error_message);
+
   
   // //LOCATION CHECKBOX ===========================================================
 
