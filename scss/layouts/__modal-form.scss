@@ -80,34 +80,6 @@ input {
   height: 48px;
 }
 
-// .formData[data-error]::after {
-//   content: attr(data-error);
-//   font-size: 0.4em;
-//   color: #e54858;
-//   display: block;
-//   margin-top: 7px;
-//   margin-bottom: 7px;
-//   text-align: right;
-//   line-height: 0.3;
-//   opacity: 0;
-//   transition: 0.3s;
-// }
-
-// .formData[data-error-visible="true"]::after {
-//   opacity: 1;
-// }
-
-// .formData[data-error-visible="true"] .text-control {
-//   border: 2px solid #e54858;
-// }
-
-
-// input[data-error]::after {
-//     content: attr(data-error);
-//     font-size: 0.4em;
-//     color: red;
-// } 
-
 .checkbox-label,
 .checkbox2-label {
   position: relative;
@@ -246,30 +218,6 @@ input {
     color: #fff;
     font-size: 20px;
     font-weight: bold;
-
-    animation: new_label_shaking 1s infinite;
-    @keyframes new_label_shaking {
-      0% {
-        transform: translateX(0);
-      }
-      25% {
-        transform: translateY(-3px);
-      }
-      35% {
-        transform: translateY(-3px) rotate(3deg);
-      }
-      55% {
-        transform: translateY(-3px) rotate(-3deg);
-      }
-      65% {
-        transform: translateY(-3px) rotate(3deg);
-      }
-      75% {
-        transform: translateY(-3px) rotate(-3deg);
-      }
-      100% {
-        transform: translateY(0) rotate(0);
-      }
-    }
+    animation: submit_form_validation_shaking 1s infinite;
   }
 }

@@ -66,33 +66,33 @@
         <span class="close"></span>
         <div class="modal-body">
           
-          <form name="reserve" action="index.html" method="get" onsubmit="return validate();">
+          <form name="reserve" action="index.html" method="get">  <!--onsubmit="return validate();"-->
            
             <div class="formData">
               <label for="firstname">Prénom</label>
               <br>
-              <input class="text-control" type="text" id="firstname" name="firstname" pattern="[a-zA-ZÀ-ÿ\-]{2,}">
+              <input class="text-control" type="text" id="firstname" name="firstname" minlength="2" maxlength='40' pattern="^[a-zA-ZÀ-ÿ][a-zA-ZÀ-ÿ/s/-]*[a-zA-ZÀ-ÿ]$">
               <br>
             </div>
 
             <div class="formData">
               <label for="lastname">Nom</label>
               <br>
-              <input class="text-control" type="text" id="lastname" name="lastname" minlength="2" pattern="[a-zA-ZÀ-ÿ\-]{2,}">
+              <input class="text-control" type="text" id="lastname" name="lastname" minlength="2" maxlength='40' pattern="^[a-zA-ZÀ-ÿ][a-zA-ZÀ-ÿ/s/-]*[a-zA-ZÀ-ÿ]$">
               <br>
             </div>
 
             <div class="formData">
               <label for="email">E-mail</label>
               <br>
-              <input class="text-control" type="email" id="email" name="email" placeholder="exemple@domaine.com" pattern="[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+.[a-zA-Z.]{2,15}">
+              <input class="text-control" type="email" id="email" name="email" placeholder="exemple@domaine.com">
               <br>
             </div>
 
             <div class="formData">
               <label for="birthdate">Date de naissance</label>
               <br>
-              <input class="text-control" type="date" id="birthdate" name="birthdate">
+              <input class="text-control" type="date" id="birthdate" name="birthdate" min="1923-01-01" max="" >
               <br>
             </div>
 
@@ -158,14 +158,14 @@
 
               <label class="checkbox2-label" for="checkbox2">
                 <span class="checkbox-icon"></span>
-                Je Je souhaite être prévenu des prochains évènements.
+                Je souhaite être prévenu des prochains évènements.
               </label>
               
               <br>
 
             </div>
 
-            <input class="btn-submit button" type="submit" value="C'est parti">
+            <input class="btn-submit button" id="form-submit" type="submit" value="C'est parti">
 
           </form>
         </div>
@@ -178,10 +178,6 @@
       Copyright 2014 - 2022, GameOn Inc.
     </p>
   </footer>
-
-<!-- <div class="submitok">
-  <div class="submitok__message">Merci pour votre participation!</div>
-</div> -->
 
   <script src="modal.js"></script>
 

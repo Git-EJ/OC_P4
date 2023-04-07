@@ -44,6 +44,30 @@ main {
     opacity: 1;
   }
 }
+/* Submit validation form message */
+@keyframes submit_form_validation_shaking {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateY(-3px);
+  }
+  35% {
+    transform: translateY(-3px) rotate(3deg);
+  }
+  55% {
+    transform: translateY(-3px) rotate(-3deg);
+  }
+  65% {
+    transform: translateY(-3px) rotate(3deg);
+  }
+  75% {
+    transform: translateY(-3px) rotate(-3deg);
+  }
+  100% {
+    transform: translateY(0) rotate(0);
+  }
+}
 /* Modal form */
 .button {
   background: #FF001B;
@@ -255,30 +279,7 @@ input:focus:valid {
   color: #fff;
   font-size: 20px;
   font-weight: bold;
-  animation: new_label_shaking 1s infinite;
-}
-@keyframes new_label_shaking {
-  0% {
-    transform: translateX(0);
-  }
-  25% {
-    transform: translateY(-3px);
-  }
-  35% {
-    transform: translateY(-3px) rotate(3deg);
-  }
-  55% {
-    transform: translateY(-3px) rotate(-3deg);
-  }
-  65% {
-    transform: translateY(-3px) rotate(3deg);
-  }
-  75% {
-    transform: translateY(-3px) rotate(-3deg);
-  }
-  100% {
-    transform: translateY(0) rotate(0);
-  }
+  animation: submit_form_validation_shaking 1s infinite;
 }
 
 /* Landing Page */
