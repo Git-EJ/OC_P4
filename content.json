@@ -5,9 +5,10 @@
 
 
     "error": {
-        "required_field" : "Ce champ est obligatoire",
+        "required_field" : "Ce champ est obligatoire oooookkkkkkkkkkkk!!!!",
         "two_letters_and_authorized_characters" : "Utilisation de caractère(s) non autorisé(s) et 2 caractères minimum doivent être saisis",
         "two_letters_minimum" : "Veuillez entrer au minimum 2 caratères",
-        "authorized_characters" : "Seules les lettres et les traits d'union sont autorisés"
+        "authorized_characters" : "Seules les lettres et les traits d'union sont autorisés",
+        "email_format" : "Veuillez entrer une adresse email correcte de type: \"link@zelda.com\""
     }
 }

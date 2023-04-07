@@ -71,35 +71,35 @@
             <div class="formData">
               <label for="firstname">Prénom</label>
               <br>
-              <input class="text-control" type="text" id="firstname" name="firstname" minlength="2" maxlength='40' pattern="^[a-zA-ZÀ-ÿ][a-zA-ZÀ-ÿ/s/-]*[a-zA-ZÀ-ÿ]$">
+              <input class="text-control" type="text" id="firstname" name="firstname" value="dd" minlength="2" maxlength='40' pattern="^[a-zA-ZÀ-ÿ][a-zA-ZÀ-ÿ\s\-]*[a-zA-ZÀ-ÿ]$" required>
               <br>
             </div>
 
             <div class="formData">
               <label for="lastname">Nom</label>
               <br>
-              <input class="text-control" type="text" id="lastname" name="lastname" minlength="2" maxlength='40' pattern="^[a-zA-ZÀ-ÿ][a-zA-ZÀ-ÿ/s/-]*[a-zA-ZÀ-ÿ]$">
+              <input class="text-control" type="text" id="lastname" name="lastname" value="ee" minlength="2" maxlength='40' pattern="^[a-zA-ZÀ-ÿ][a-zA-ZÀ-ÿ\s\-]*[a-zA-ZÀ-ÿ]$" required>
               <br>
             </div>
 
             <div class="formData">
               <label for="email">E-mail</label>
               <br>
-              <input class="text-control" type="email" id="email" name="email" placeholder="exemple@domaine.com">
+              <input class="text-control" type="email" id="email" name="email" placeholder="exemple@domaine.com" value="dd@ee.com" pattern=^[\w.%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}$ required>
               <br>
             </div>
 
             <div class="formData">
               <label for="birthdate">Date de naissance</label>
               <br>
-              <input class="text-control" type="date" id="birthdate" name="birthdate" min="1923-01-01" max="" >
+              <input class="text-control" type="date" id="birthdate" name="birthdate"  value="" min="1923-01-01" max="" >
               <br>
             </div>
 
             <div class="formData">
               <label for="tournament-quantity">À combien de tournois GameOn avez-vous déjà participé ?</label>
               <br>
-              <input type="number" class="text-control" id="tournament-quantity" name="tournament-quantity" min="0" max="99">
+              <input type="number" class="text-control" id="tournament-quantity" name="tournament-quantity" value="" min="0" max="99" oninput="regexTournament(event)" required>
             </div>
 
             <p class="text-label">A quel tournoi souhaitez-vous participer cette année ?</p>
@@ -136,7 +136,7 @@
                 Boston
               </label>
 
-              <input class="checkbox-input" type="radio" id="location6" name="location" value="Portland">
+              <input class="checkbox-input" type="radio" id="location6" name="location" value="Portland" checked>
               <label class="checkbox-label" for="location6">
                 <span class="checkbox-icon"></span>
                 Portland
@@ -145,8 +145,7 @@
 
             <div class="formData">
 
-              <input class="checkbox-input" type="checkbox" id="checkbox1" required checked > <!-- checked = checked by default -->
-
+              <input class="checkbox-input" type="checkbox" id="checkbox1" checked required>
               <label class="checkbox2-label" for="checkbox1">
                 <span class="checkbox-icon"></span>
                 J'ai lu et accepté les conditions d'utilisation.

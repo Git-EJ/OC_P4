@@ -4,7 +4,7 @@
 // manages the display of the nav in low resolutions
 
 function editNav() {
-  var x = document.getElementById("myTopnav");
+  const x = document.getElementById("myTopnav");
   if (x.className === "topnav") {
     x.className += " responsive";
   } else {
@@ -12,16 +12,60 @@ function editNav() {
   }
 }
 
+//REGEX ==========================================================
+
+function regexTournament(event) {
+  //only numbers 0 to 9
+  event.target.value = event.target.value.replace([0-9], '');
+
+  //maximum 2 numbers
+  if (event.target.value.length > 2) {
+    event.target.value = event.target.value.slice(0,2);
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
 
 //MODAL FORM ==========================================================
 
+
 function doIt(data) {
-
+  
   const error_message = data.error;
-  
-  
-  //Hyphen management for first and last name fields
 
+
+
+  //LAUNCH & CLOSE MODAL FORM ==========================================================
+  
+  const modalBg = document.querySelector(".bground");
+  const modalBtn = document.querySelectorAll(".modal-btn");
+  const modalClose = document.querySelector(".close");
+  
+  const launchModal = (modal) => { modal.style.display = "block"; }
+  const closeModal = (modal) => { modal.style.display = "none"; }
+  
+  // launch modal event
+  modalBtn.forEach((btn) => btn.addEventListener('click', ()=>launchModal(modalBg)));
+  
+  //close modal event
+  modalClose.addEventListener('click', ()=>closeModal(modalBg));
+
+
+
+  //INPUT FIELD MANAGEMENT ==========================================================
+
+
+  //Hyphen management for first and last name fields
+  
   function hyphenFirstandLastNameManager(inputFieldName){
     inputFieldName.addEventListener('input', (e) => {
       let name = e.target.value
@@ -31,14 +75,19 @@ function doIt(data) {
       }
     });
   }
-
-
+  
+  
+  
   //Validation of the first and last name fields
 
-  function validateElementString(inputFieldName, entryError) {
+  function validateElementsName(inputFieldName, entryError) {
+    //before value entry for valueMissing
+    if(inputFieldName.validity.valueMissing){
+      inputFieldName.setCustomValidity(entryError.required_field);
+    }
     
     inputFieldName.addEventListener('input', function() {
-
+      //after value entry for valueMissing
       if(inputFieldName.validity.valueMissing){
         inputFieldName.setCustomValidity(entryError.required_field);
       
@@ -56,63 +105,80 @@ function doIt(data) {
       }
     })
   }
+  
+    
+  //Validation of the email field
+  
+  function validateElementEmail(inputFieldName, entryError) {
+    
+    if(inputFieldName.validity.valueMissing){
+      inputFieldName.setCustomValidity(entryError.required_field);
+    }
+
+    inputFieldName.addEventListener('input', function() {
+      
+      if(inputFieldName.validity.typeMismatch || inputFieldName.validity.valueMissing || inputFieldName.validity.patternMismatch){
+        inputFieldName.setCustomValidity(entryError.email_format);
+        
+      } else {
+        inputFieldName.setCustomValidity("");
+      }
+    })
+  }
+  
+  //Validation of the birthdate field
+
+
 
 
   
-  
-  //LAUNCH & CLOSE MODAL FORM ==========================================================
-  
-  const modalBg = document.querySelector(".bground");
-  const modalBtn = document.querySelectorAll(".modal-btn");
-  const modalClose = document.querySelector(".close");
-  
-  const launchModal = (modal) => { modal.style.display = "block"; }
-  const closeModal = (modal) => { modal.style.display = "none"; }
+  //Validation of the tournament field
+
+  function validateElementTournament(inputFieldName, entryError) {
+    if(inputFieldName.validity.valueMissing){
+      inputFieldName.setCustomValidity(entryError.required_field);
+    }
+  }
 
 
-  // launch modal event
-  modalBtn.forEach((btn) => btn.addEventListener('click', ()=>launchModal(modalBg)));
-  
-  //close modal event
-  modalClose.addEventListener('click', ()=>closeModal(modalBg));
-  
+
+
+
+
 
 
   //FIRSTNAME FIELD ===========================================================
-
   //modal firstname error message
   const firstname = document.getElementById('firstname');
-  validateElementString(firstname, error_message);
+  validateElementsName(firstname, error_message);
   hyphenFirstandLastNameManager(firstname);
- 
 
 
+  
   //LASTNAME FIELD ===========================================================
-
   //modal lastname error message
   const lastname = document.getElementById('lastname');
-  validateElementString(lastname, error_message)
+  validateElementsName(lastname, error_message)
   hyphenFirstandLastNameManager(lastname);
-
-
-
+  
+  
+  
   //EMAIL FIELD ===========================================================
-
   // modal email error message
-
   const email = document.getElementById('email');
-  console.log(email)
-
-  email.addEventListener('keyup', function() {
-    if(email.validity.typeMismatch){
-      email.setCustomValidity(`Veuillez entrer une adresse email correcte de type: "link@zelda.com"`);
-    }else {
-      email.setCustomValidity("");
-    }
-  });
+  validateElementEmail(email, error_message)
 
 
+  //BIRTHDATE FIELD ===========================================================
+  //modal birthdate error message
+  
 
+
+  //TOURNAMENTS FIELD ===========================================================
+  //modal tournament error message
+  const tournament = document.getElementById('tournament-quantity');
+  validateElementTournament(tournament, error_message);
+  
   // //LOCATION CHECKBOX ===========================================================
 
   //modal location validation
@@ -177,10 +243,10 @@ function doIt(data) {
   });
 
 
-  //modal automatic spawn (simulates a click automatically)
-
+  
   //DEV START
-
+  
+  //modal automatic spawn (simulates a click automatically)
   const btnClick = document.querySelector('.btn-signup.modal-btn');
   btnClick.click();
 
@@ -192,8 +258,7 @@ function doIt(data) {
 
 //CONTENT.JSON ==========================================================
 
-// recovery of error or validation messages in the .json
-
+// recovery of error or validation messages in content.json
 window.onload = async ()=>{
   fetch('./content.json')
   .then(response => response.json())
