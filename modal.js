@@ -59,16 +59,14 @@ function doIt(data) {
   
   for (let i = 0; i < inputs.length; i++) {
     if (inputs[i].value === ""){
-      console.log('alert')
       inputs[i].setCustomValidity(error_message.required_field);
     }
-  }
+  };
   
    // After value entry for valueMissing
   document.addEventListener('input' , function(event) {
 
     if (event.target.value === ""){
-      console.log('alert2')
       event.target.setCustomValidity(error_message.required_field);
     }
   });
@@ -83,7 +81,7 @@ function doIt(data) {
         event.target.value = name1
       }
     })
-  }
+  };
 
 
 // function test (inputFieldName, entryError) {
