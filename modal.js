@@ -101,19 +101,20 @@ function doIt(data) {
   function validateElementsName(inputFieldName, entryError) {
 
     inputFieldName.addEventListener('input', function() {
-      //after value entry for valueMissing
-      if(inputFieldName.validity.valueMissing){
-        inputFieldName.setCustomValidity(entryError.required_field);
       
-      } else if(inputFieldName.validity.tooShort){
+      
+      if (inputFieldName.validity.tooShort){
         inputFieldName.setCustomValidity(entryError.two_letters_minimum);
         
       } else if (inputFieldName.validity.patternMismatch){
         inputFieldName.setCustomValidity(entryError.authorized_characters);
         
-      } else if(inputFieldName.validity.patternMismatch && inputFieldName.validity.tooShort){
-          inputFieldName.setCustomValidity(entryError.two_letters_and_authorized_characters);
-
+      } else if (inputFieldName.validity.patternMismatch && inputFieldName.validity.tooShort){
+        inputFieldName.setCustomValidity(entryError.two_letters_and_authorized_characters);
+        
+      } else if (inputValue.startsWith ('-') || inputValue.endsWith ('-')) {
+        inputFieldName.setCustomValidity(entryError.hyphen_not_allowed_at_the_start_or_end);
+        
       } else {
         inputFieldName.setCustomValidity("");
       }
