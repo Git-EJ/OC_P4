@@ -34,8 +34,6 @@ function doIt(data) {
   
   const error_message = data.error;
   
-  
-  
   //LAUNCH & CLOSE MODAL FORM ==========================================================
   
   const modalBg = document.querySelector(".bground");
@@ -55,7 +53,8 @@ function doIt(data) {
   
   //INPUT FIELD MANAGEMENT ==========================================================
   
-  // before value entry for valueMissing
+
+  // Before value entry for valueMissing
   let inputs = document.querySelectorAll('input');
   
   for (let i = 0; i < inputs.length; i++) {
@@ -65,7 +64,7 @@ function doIt(data) {
     }
   }
   
-   // after value entry for valueMissing
+   // After value entry for valueMissing
   document.addEventListener('input' , function(event) {
 
     if (event.target.value === ""){
@@ -74,46 +73,66 @@ function doIt(data) {
     }
   });
 
-  //Hyphen management for first and last name fields
   
-  function hyphenFirstandLastNameManager(inputFieldName){
-    inputFieldName.addEventListener('input', (e) => {
-      let name = e.target.value
+  //Hyphen management for first and last name fields
+  function hyphenFirstandLastNameManager(inputFieldName) {
+    inputFieldName.addEventListener('input', (event) => {
+      let name = event.target.value
       let name1 = name.replace('--','-')
       if (name.length!==name1.length) {
-        e.target.value = name1
+        event.target.value = name1
       }
     })
   }
+
+
+// function test (inputFieldName, entryError) {
+
+//   inputFieldName.addEventListener('input', function() {
+
+//     let inputValue = inputFieldName.value;
+
+//     if (inputValue.startsWith ('-') || inputValue.endsWith ('-')) {
+//       inputFieldName.setCustomValidity(entryError.hyphen_not_allowed_at_the_start_or_end);
+//     }
+//   })
+// }
+  
   
   //Validation of the first and last name fields
-  
   function validateElementsName(inputFieldName, entryError) {
-    
+
     inputFieldName.addEventListener('input', function() {
+
+      let inputValue = inputFieldName.value;
+      if (inputValue.startsWith ('-') || inputValue.endsWith ('-')) {
+        inputFieldName.setCustomValidity(entryError.hyphen_not_allowed_at_the_start_or_end);}
+
+      if (inputFieldName.validity.tooShort){
+      inputFieldName.setCustomValidity(entryError.two_letters_minimum);
         
-      if(inputFieldName.validity.tooShort){
-        inputFieldName.setCustomValidity(entryError.two_letters_minimum);
-        
-      } else if(inputFieldName.validity.patternMismatch){
+      } else if (inputFieldName.validity.patternMismatch){
         inputFieldName.setCustomValidity(entryError.authorized_characters);
         
-      } else if(inputFieldName.validity.patternMismatch && inputFieldName.validity.tooShort){
+      } else if (inputFieldName.validity.patternMismatch && inputFieldName.validity.tooShort){
         inputFieldName.setCustomValidity(entryError.two_letters_and_authorized_characters);
-        
+
+      } else if (inputValue.startsWith ('-') || inputValue.endsWith ('-')) {
+          inputFieldName.setCustomValidity(entryError.hyphen_not_allowed_at_the_start_or_end);
+      
       } else {
         inputFieldName.setCustomValidity("");
       }
     })
   }
   
+
   //Validation of the email field
-  
   function validateElementEmail(inputFieldName, entryError) {
     
     inputFieldName.addEventListener('input', function() {
       
-      if(inputFieldName.validity.typeMismatch || inputFieldName.validity.valueMissing || inputFieldName.validity.patternMismatch){
+      if(inputFieldName.validity.typeMismatch || inputFieldName.validity.patternMismatch){
         inputFieldName.setCustomValidity(entryError.email_format);
         
       } else {
@@ -122,34 +141,29 @@ function doIt(data) {
     })
   }
   
-  //Validation of the birthdate field
-  
-  
-  
-  
-  
-  //Validation of the tournament field
-  
-  function validateElementTournament(inputFieldName, entryError) {
-    if(inputFieldName.validity.valueMissing){
-      inputFieldName.setCustomValidity(entryError.required_field);
+
+  //Validation of the birthdate and tournament fields
+  function validateElementBirthdateAndTournament(inputFieldName) {
+
+    inputFieldName.addEventListener('input', function() {
       
-      inputFieldName.addEventListener('input', function() {
-        
-        const tournamentValue = document.getElementById('tournament-quantity').value;
-        
-        if (tournamentValue.length > 0) {  //without this condition, the error message is displayed when the field is empty or not empty
-          inputFieldName.setCustomValidity("");
-        }
-      })
-    }
+      const birthdateValue = document.getElementById('birthdate').value;
+      const tournamentValue = document.getElementById('tournament-quantity').value;
+      
+      if (birthdateValue.length > 0 || tournamentValue.length > 0) {  //without this condition, the error message is displayed when the field is empty or not empty
+        inputFieldName.setCustomValidity("");
+      }
+    })
   }
+  
+
   
   //FIRSTNAME FIELD ===========================================================
   //modal firstname error messages
   const firstname = document.getElementById('firstname');
   validateElementsName(firstname, error_message);
   hyphenFirstandLastNameManager(firstname);
+  // test(firstname, error_message);
   
   
   
@@ -169,13 +183,14 @@ function doIt(data) {
 
   //BIRTHDATE FIELD ===========================================================
   //modal birthdate error message
+  const birthdate = document.getElementById('birthdate');
+  validateElementBirthdateAndTournament(birthdate, error_message);
   
-
-
   //TOURNAMENT FIELD ===========================================================
   //modal tournament error message
   const tournament = document.getElementById('tournament-quantity');
-  validateElementTournament(tournament, error_message);
+  validateElementBirthdateAndTournament(tournament, error_message);
+
 
   
   // //LOCATION CHECKBOX ===========================================================
@@ -246,13 +261,25 @@ function doIt(data) {
 
 
 
-
-  
   //DEV START
   
   //modal automatic spawn (simulates a click automatically)
   const btnClick = document.querySelector('.btn-signup.modal-btn');
   btnClick.click();
+
+
+  //value befor user entry
+  const form = document.querySelector('form');
+  const inputsValue = form.querySelectorAll('input');
+  
+  inputsValue.forEach(inputsValue => {
+    console.log(inputsValue.value);
+  });
+
+  //value after user entry
+  form.addEventListener('input', (event) => {
+    console.log(event.target.value);
+  });
 
   //DEV END
 
