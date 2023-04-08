@@ -33,9 +33,9 @@ function regexTournament(event) {
 function doIt(data) {
   
   const error_message = data.error;
-
-
-
+  
+  
+  
   //LAUNCH & CLOSE MODAL FORM ==========================================================
   
   const modalBg = document.querySelector(".bground");
@@ -50,11 +50,29 @@ function doIt(data) {
   
   //close modal event
   modalClose.addEventListener('click', ()=>closeModal(modalBg));
-
-
-
+  
+  
+  
   //INPUT FIELD MANAGEMENT ==========================================================
+  
+  // before value entry for valueMissing
+  let inputs = document.querySelectorAll('input');
+  
+  for (let i = 0; i < inputs.length; i++) {
+    if (inputs[i].value === ""){
+      console.log('alert')
+      inputs[i].setCustomValidity(error_message.required_field);
+    }
+  }
+  
+   // after value entry for valueMissing
+  document.addEventListener('input' , function(event) {
 
+    if (event.target.value === ""){
+      console.log('alert2')
+      event.target.setCustomValidity(error_message.required_field);
+    }
+  });
 
   //Hyphen management for first and last name fields
   
@@ -68,45 +86,31 @@ function doIt(data) {
     })
   }
   
-  
-  
   //Validation of the first and last name fields
-
+  
   function validateElementsName(inputFieldName, entryError) {
-    //before value entry for valueMissing
-    if(inputFieldName.validity.valueMissing){
-      inputFieldName.setCustomValidity(entryError.required_field);
-    }
     
     inputFieldName.addEventListener('input', function() {
-      //after value entry for valueMissing
-      if(inputFieldName.validity.valueMissing){
-        inputFieldName.setCustomValidity(entryError.required_field);
-      
-      } else if(inputFieldName.validity.tooShort){
+        
+      if(inputFieldName.validity.tooShort){
         inputFieldName.setCustomValidity(entryError.two_letters_minimum);
         
       } else if(inputFieldName.validity.patternMismatch){
         inputFieldName.setCustomValidity(entryError.authorized_characters);
         
       } else if(inputFieldName.validity.patternMismatch && inputFieldName.validity.tooShort){
-          inputFieldName.setCustomValidity(entryError.two_letters_and_authorized_characters);
-
+        inputFieldName.setCustomValidity(entryError.two_letters_and_authorized_characters);
+        
       } else {
         inputFieldName.setCustomValidity("");
       }
     })
   }
   
-    
   //Validation of the email field
   
   function validateElementEmail(inputFieldName, entryError) {
     
-    if(inputFieldName.validity.valueMissing){
-      inputFieldName.setCustomValidity(entryError.required_field);
-    }
-
     inputFieldName.addEventListener('input', function() {
       
       if(inputFieldName.validity.typeMismatch || inputFieldName.validity.valueMissing || inputFieldName.validity.patternMismatch){
@@ -117,7 +121,6 @@ function doIt(data) {
       }
     })
   }
-  
   
   //Validation of the birthdate field
   
@@ -132,30 +135,23 @@ function doIt(data) {
       inputFieldName.setCustomValidity(entryError.required_field);
       
       inputFieldName.addEventListener('input', function() {
-
+        
         const tournamentValue = document.getElementById('tournament-quantity').value;
-
+        
         if (tournamentValue.length > 0) {  //without this condition, the error message is displayed when the field is empty or not empty
           inputFieldName.setCustomValidity("");
         }
       })
     }
   }
-
-
-
-
-
-
-
-
+  
   //FIRSTNAME FIELD ===========================================================
   //modal firstname error messages
   const firstname = document.getElementById('firstname');
   validateElementsName(firstname, error_message);
   hyphenFirstandLastNameManager(firstname);
-
-
+  
+  
   
   //LASTNAME FIELD ===========================================================
   //modal lastname error messages
@@ -244,6 +240,11 @@ function doIt(data) {
       });
     }
   });
+
+
+
+
+
 
 
   
