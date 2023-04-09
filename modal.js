@@ -27,7 +27,7 @@ function regexTournament(event) {
 
 
 
-//MODAL FORM ==========================================================
+//MODAL FORM START =======================================================================================================================================
 
 
 function doIt(data) {
@@ -51,7 +51,7 @@ function doIt(data) {
   
   
   
-  //INPUT FIELD MANAGEMENT ==========================================================
+  //INPUT FIELD MANAGEMENT START ==========================================================
   
 
   // Before value entry for valueMissing
@@ -83,25 +83,11 @@ function doIt(data) {
     })
   };
 
-
-// function test (inputFieldName, entryError) {
-
-//   inputFieldName.addEventListener('input', function() {
-
-//     let inputValue = inputFieldName.value;
-
-//     if (inputValue.startsWith ('-') || inputValue.endsWith ('-')) {
-//       inputFieldName.setCustomValidity(entryError.hyphen_not_allowed_at_the_start_or_end);
-//     }
-//   })
-// }
-  
   
   //Validation of the first and last name fields
   function validateElementsName(inputFieldName, entryError) {
 
     inputFieldName.addEventListener('input', function() {
-      
       
       if (inputFieldName.validity.tooShort){
         inputFieldName.setCustomValidity(entryError.two_letters_minimum);
@@ -119,6 +105,10 @@ function doIt(data) {
         inputFieldName.setCustomValidity("");
       }
       
+
+      // inputFieldName is a dom element (inputfield) ==> object. 
+      // The start/end method is a string method. So we have to convert the dom element into a string.
+      // For this we retrieve the value of inputfieldname with .value and we call start/end method with this value.
       let inputValue = inputFieldName.value;
       if (inputValue.startsWith ('-') || inputValue.endsWith ('-')) {
         inputFieldName.setCustomValidity(entryError.hyphen_not_allowed_at_the_start_or_end);}
@@ -154,45 +144,51 @@ function doIt(data) {
       }
     })
   }
-  
+
+  //INPUT FIELD MANAGEMENT END ==========================================================
+
+
 
   
-  //FIRSTNAME FIELD ===========================================================
+  //ERROR MESSAGEs DISPLAY START ================================================================
+  
+  //FIRSTNAME FIELD
   //modal firstname error messages
   const firstname = document.getElementById('firstname');
   validateElementsName(firstname, error_message);
   hyphenFirstandLastNameManager(firstname);
-  // test(firstname, error_message);
+
   
-  
-  
-  //LASTNAME FIELD ===========================================================
+  //LASTNAME FIELD 
   //modal lastname error messages
   const lastname = document.getElementById('lastname');
   validateElementsName(lastname, error_message)
   hyphenFirstandLastNameManager(lastname);
   
   
-  
-  //EMAIL FIELD ===========================================================
+  //EMAIL FIELD 
   // modal email error message
   const email = document.getElementById('email');
   validateElementEmail(email, error_message);
 
 
-  //BIRTHDATE FIELD ===========================================================
+  //BIRTHDATE FIELD 
   //modal birthdate error message
   const birthdate = document.getElementById('birthdate');
   validateElementBirthdateAndTournament(birthdate, error_message);
   
-  //TOURNAMENT FIELD ===========================================================
+  //TOURNAMENT FIELD 
   //modal tournament error message
   const tournament = document.getElementById('tournament-quantity');
   validateElementBirthdateAndTournament(tournament, error_message);
 
 
+  //ERROR MESSAGEs DISPLAY END ================================================================
   
-  // //LOCATION CHECKBOX ===========================================================
+
+
+
+  // //LOCATION CHECKBOX =====================================================================
 
   //modal location validation
   let locChecked = false;
@@ -210,7 +206,7 @@ function doIt(data) {
     
 
 
-  //SUBMIT MODAL FORM ===========================================================
+  //SUBMIT MODAL FORM START ===========================================================
 
   //modal submit validation form negative or positive  
 
@@ -254,9 +250,46 @@ function doIt(data) {
       });
     }
   });
+  
+  
+  //SUBMIT MODAL FORM END ===========================================================
 
 
+  //BIRTHDATE MINORS NOT ALLOWED START ===========================================================
 
+  let todaysDate = new Date();
+  let dateOfTheDay = todaysDate.toLocaleString('fr-FR',{
+    year: 'numeric',
+    month: 'numeric',
+    day: 'numeric',
+  });
+  console.log(`date : ` , dateOfTheDay);
+
+
+  let year = todaysDate.getFullYear();
+  console.log(`getFullYear : `, year);
+  
+
+  // function forbiddenToMinors() {
+    const birthdateValue = document.getElementById('birthdate').value;
+    console.log(birthdateValue);
+
+  //   if ((dateOfTheDay - birthdateValue) > 18) {
+  //     console.log('minors are not allowed');
+  //   } else {
+  //     console.log('you are allowed');
+  //   }
+  // }
+  // forbiddenToMinors()
+
+
+  let calculateAge;
+
+  (dateOfTheDay - birthdateValue) = calculateAge;
+  console.log(`calculateAge : `, calculateAge);
+
+
+  //BIRTHDATE MINORS NOT ALLOWED END ===========================================================
 
 
 
@@ -267,22 +300,40 @@ function doIt(data) {
   btnClick.click();
 
 
-  //value befor user entry
-  const form = document.querySelector('form');
-  const inputsValue = form.querySelectorAll('input');
+  // //value befor user entry
+  // const form = document.querySelector('form');
+  // const inputsValue = form.querySelectorAll('input');
   
-  inputsValue.forEach(inputsValue => {
-    console.log(inputsValue.value);
-  });
+  // inputsValue.forEach(inputsValue => {
+  //   console.log(inputsValue.value);
+  // });
 
-  //value after user entry
-  form.addEventListener('input', (event) => {
-    console.log(event.target.value);
-  });
+  // //value after user entry
+  // form.addEventListener('input', (event) => {
+  //   console.log(event.target.value);
+  // });
+
+
+  //value after user entry for birthdate
+  const birthDate = document.getElementById('birthdate').value;
+  console.log(`Before : ` , birthDate);
+
+  // //value after user entry for birthdate
+  function birthDateAfterValue(){
+    const birthDateAfter = document.getElementById('birthdate');
+    birthDateAfter.addEventListener('input', (event) => {
+      let birthDateNewEntry = event.target.value;
+      console.log(`After : ` , birthDateNewEntry);
+    });
+  }
+  birthDateAfterValue();
+
 
   //DEV END
 
-}
+
+} //end of doIt Function
+
 
 
 
@@ -294,3 +345,6 @@ window.onload = async ()=>{
   .then(response => response.json())
   .then(data => doIt(data));
 }
+
+
+//MODAL FORM END =======================================================================================================================================
