@@ -263,30 +263,18 @@ function doIt(data) {
     month: 'numeric',
     day: 'numeric',
   });
-  console.log(`date : ` , dateOfTheDay);
+  console.log(`date Of The Day : ` , dateOfTheDay);
 
 
   let year = todaysDate.getFullYear();
-  console.log(`getFullYear : `, year);
+  console.log(`getFullYear today's date : `, year);
   
-
-  // function forbiddenToMinors() {
-    const birthdateValue = document.getElementById('birthdate').value;
-    console.log(birthdateValue);
-
-  //   if ((dateOfTheDay - birthdateValue) > 18) {
-  //     console.log('minors are not allowed');
-  //   } else {
-  //     console.log('you are allowed');
-  //   }
-  // }
-  // forbiddenToMinors()
-
-
-  let calculateAge;
-
-  (dateOfTheDay - birthdateValue) = calculateAge;
-  console.log(`calculateAge : `, calculateAge);
+  let monthIndexJS = todaysDate.getMonth();
+  let month = monthIndexJS + 1;
+  console.log(`getMonth today's date : `, month);
+  
+  let day = todaysDate.getDate();
+  console.log(`getDate today's date : `, day);
 
 
   //BIRTHDATE MINORS NOT ALLOWED END ===========================================================
@@ -316,15 +304,41 @@ function doIt(data) {
 
   //value after user entry for birthdate
   const birthDate = document.getElementById('birthdate').value;
-  console.log(`Before : ` , birthDate);
+  console.log(`Before entry : ` , birthDate);
 
   // //value after user entry for birthdate
   function birthDateAfterValue(){
     const birthDateAfter = document.getElementById('birthdate');
     birthDateAfter.addEventListener('input', (event) => {
       let birthDateNewEntry = event.target.value;
-      console.log(`After : ` , birthDateNewEntry);
+      console.log(`After entry : ` , birthDateNewEntry);
+
+      let dateInBirthDateNewEntry = new Date(birthDateNewEntry);
+      console.log(`dateInBirthdayNewEntry : `, dateInBirthDateNewEntry)
+
+      let yearInBirthdayNewEntry = dateInBirthDateNewEntry.getFullYear();
+      console.log (`yearInBirthdayNewEntry : `, yearInBirthdayNewEntry);
+
+      let monthIndexJSInBirthdayNewEntry = dateInBirthDateNewEntry.getMonth();
+      let monthInBirthdayNewEntry = monthIndexJSInBirthdayNewEntry + 1;
+      console.log (`monthInBirthdayNewEntry : `, monthInBirthdayNewEntry);
+
+      let dayInBirthdayNewEntry = dateInBirthDateNewEntry.getDate();
+      console.log (`dayInBirthdayNewEntry : `, dayInBirthdayNewEntry);
+      
+      if (((year - yearInBirthdayNewEntry) <= 18) && ((month - monthInBirthdayNewEntry) <= 0) && ((day - dayInBirthdayNewEntry) < 0)) {
+        console.log('minors are not allowed');
+      }else{
+        console.log('you are allowed');
+      }
+
+      // let yearInBirthdayNewEntry = birthDateNewEntry.getFullYear();     //?????????????? why doesn't work ?????? object matter?
+      // console.log (`dateInBirthdayNewEntry : `, yearInBirthdayNewEntry);
     });
+      
+      
+
+
   }
   birthDateAfterValue();
 
