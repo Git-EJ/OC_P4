@@ -263,18 +263,18 @@ function doIt(data) {
     month: 'numeric',
     day: 'numeric',
   });
-  console.log(`date Of The Day : ` , dateOfTheDay);
+  // console.log(`date Of The Day : ` , dateOfTheDay);
 
 
   let year = todaysDate.getFullYear();
-  console.log(`getFullYear today's date : `, year);
+  // console.log(`getFullYear today's date : `, year);
   
   let monthIndexJS = todaysDate.getMonth();
   let month = monthIndexJS + 1;
-  console.log(`getMonth today's date : `, month);
+  // console.log(`getMonth today's date : `, month);
   
   let day = todaysDate.getDate();
-  console.log(`getDate today's date : `, day);
+  // console.log(`getDate today's date : `, day);
 
 
   //BIRTHDATE MINORS NOT ALLOWED END ===========================================================
@@ -302,12 +302,12 @@ function doIt(data) {
   // });
 
 
-  //value after user entry for birthdate
-  const birthDate = document.getElementById('birthdate').value;
-  console.log(`Before entry : ` , birthDate);
+  //value before user entry for birthdate
+  // const birthDate = document.getElementById('birthdate').value;
+  // console.log(`Before entry : ` , birthDate);
 
   // //value after user entry for birthdate
-  function birthDateAfterValue(){
+ 
     const birthDateAfter = document.getElementById('birthdate');
     birthDateAfter.addEventListener('input', (event) => {
       let birthDateNewEntry = event.target.value;
@@ -325,12 +325,25 @@ function doIt(data) {
 
       let dayInBirthdayNewEntry = dateInBirthDateNewEntry.getDate();
       console.log (`dayInBirthdayNewEntry : `, dayInBirthdayNewEntry);
-      
+      //devstart
+      let calculateYear = year - yearInBirthdayNewEntry;
+      console.log(`calculateYear : `, calculateYear);
+  
+      let calculateMonth = month - monthInBirthdayNewEntry;
+       console.log(`calculateMonth : `, calculateMonth);
+  
+      let calculateDay = day - dayInBirthdayNewEntry;
+        console.log(`calculateDay : `, calculateDay);
+      //dev end
+
       if (year - yearInBirthdayNewEntry < 18) {
         console.log('minors are not allowed 1st if');
 
-      } else if (((year - yearInBirthdayNewEntry) === 18) && ((month - monthInBirthdayNewEntry) <= 0) && ((day - dayInBirthdayNewEntry) < 0)) {
+      } else if (((year - yearInBirthdayNewEntry) === 18) && ((month - monthInBirthdayNewEntry) < 0)) {
         console.log('minors are not allowed 2nd if');
+
+      } else if (((year - yearInBirthdayNewEntry) === 18) && ((month - monthInBirthdayNewEntry) === 0) && ((day - dayInBirthdayNewEntry) < 0)) {
+        console.log('minors are not allowed 3rd if');
 
       } else { 
         console.log('you are allowed');
@@ -339,13 +352,9 @@ function doIt(data) {
       // let yearInBirthdayNewEntry = birthDateNewEntry.getFullYear();     //?????????????? why doesn't work ?????? object matter?
       // console.log (`dateInBirthdayNewEntry : `, yearInBirthdayNewEntry);
     });
-      
-      
-
-
-  }
-  birthDateAfterValue();
-
+    
+    
+    
 
   //DEV END
 
