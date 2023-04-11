@@ -326,9 +326,13 @@ function doIt(data) {
       let dayInBirthdayNewEntry = dateInBirthDateNewEntry.getDate();
       console.log (`dayInBirthdayNewEntry : `, dayInBirthdayNewEntry);
       
-      if (((year - yearInBirthdayNewEntry) <= 18) && ((month - monthInBirthdayNewEntry) <= 0) && ((day - dayInBirthdayNewEntry) < 0)) {
-        console.log('minors are not allowed');
-      }else{
+      if (year - yearInBirthdayNewEntry < 18) {
+        console.log('minors are not allowed 1st if');
+
+      } else if (((year - yearInBirthdayNewEntry) === 18) && ((month - monthInBirthdayNewEntry) <= 0) && ((day - dayInBirthdayNewEntry) < 0)) {
+        console.log('minors are not allowed 2nd if');
+
+      } else { 
         console.log('you are allowed');
       }
 
