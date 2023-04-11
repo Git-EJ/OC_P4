@@ -1,5 +1,5 @@
 
-//DISPLAY ==========================================================
+//DISPLAY START ==========================================================
 
 // manages the display of the nav in low resolutions
 
@@ -12,8 +12,11 @@ function editNav() {
   }
 }
 
+//DISPLAY END ==========================================================
 
-//REGEX ==========================================================
+
+
+//REGEX START ==========================================================
 
 function regexTournament(event) {
   //only numbers 0 to 9
@@ -25,10 +28,11 @@ function regexTournament(event) {
   }
 }
 
+//REGEX END ==========================================================
+
 
 
 //MODAL FORM START =======================================================================================================================================
-
 
 function doIt(data) {
   
@@ -53,7 +57,6 @@ function doIt(data) {
   
   //INPUT FIELD MANAGEMENT START ==========================================================
   
-
   // Before value entry for valueMissing
   let inputs = document.querySelectorAll('input');
   
@@ -116,19 +119,101 @@ function doIt(data) {
   }
   
 
-  //Validation of the email field
+  // Validation of the email field start
   function validateElementEmail(inputFieldName, entryError) {
     
     inputFieldName.addEventListener('input', function() {
       
-      if(inputFieldName.validity.typeMismatch || inputFieldName.validity.patternMismatch){
+      if(inputFieldName.validity.typeMismatch || inputFieldName.validity.patternMismatch) {
         inputFieldName.setCustomValidity(entryError.email_format);
-        
+        console.log(entryError.email_format)
       } else {
         inputFieldName.setCustomValidity("");
       }
+      // console.log('IN  ' + inputFieldName.value)
     })
   }
+
+  function validateElementEmail2(inputFieldName2, entryError) {
+    
+    inputFieldName2.addEventListener('input', function() {
+      
+      if(inputFieldName2.validity.typeMismatch || inputFieldName2.validity.patternMismatch) {
+        inputFieldName2.setCustomValidity(entryError.email_format);
+        console.log(entryError.email_format)
+      } else {
+        inputFieldName2.setCustomValidity("");
+      }
+      // console.log('IN2  ' + inputFieldName2.value)
+    })
+  }
+
+
+
+function identicalEmail(inputFieldName, inputFieldName2, entryError) {
+
+  inputFieldName.addEventListener('input', function() {
+
+    if (inputFieldName.value != inputFieldName2.value) {
+      inputFieldName.setCustomValidity(entryError.email_are_not_identical);
+      console.log('email != confirmartion')
+    } else {
+      inputFieldName.setCustomValidity("");
+      console.log('email = confirmation')
+    }
+    // console.log(inputFieldName.value + ' ID ' + inputFieldName2.value)
+  })
+}
+
+
+
+function identicalEmail2(inputFieldName, inputFieldName2, entryError) {
+
+  inputFieldName2.addEventListener('input', function() {
+
+    if (inputFieldName2.value != inputFieldName.value) {
+      inputFieldName2.setCustomValidity(entryError.email_are_not_identical);
+      console.log('email != confirmartion')
+    } else {
+      inputFieldName2.setCustomValidity("");
+      console.log('email = confirmation')
+    }
+    // console.log(inputFieldName2.value + ' ID2 ' + inputFieldName.value)
+  })
+}
+
+// function identicalEmail(inputFieldName, inputFieldName2, entryError) {
+
+//   inputFieldName.addEventListener('input', function() {
+
+//     if ((inputFieldName.value != inputFieldName2.value) || (inputFieldName2.value != inputFieldName.value)) {
+//       inputFieldName.setCustomValidity(entryError.email_are_not_identical);
+//       console.log('email != confirmartion')
+
+//     } else if ((inputFieldName.value = inputFieldName2.value) || (inputFieldName2.value = inputFieldName.value)) {
+//       inputFieldName.setCustomValidity(entryError.email_are_not_identical);
+//       console.log('email != confirmartion')
+//     } 
+//   })
+// }
+
+
+// const email =  document.getElementById('email');
+// const emailConfirmation = document.getElementById('email-confirmation');
+// function validateEmail(inputFieldName, inputFieldName2, entryError) {
+
+//   if (inputFieldName.value !== inputFieldName2.value) {
+//     inputFieldName2.setCustomValidity(entryError.email_are_not_identical);
+//   } else {
+//     inputFieldName.setCustomValidity('');
+//   }
+// }
+
+// email.addEventListener('input', validateEmail);
+// emailConfirmation.addEventListener('input', validateEmail);
+
+
+ //Validation of the email field end
   
 
   //Validation of the birthdate and tournament fields
@@ -145,118 +230,9 @@ function doIt(data) {
     })
   }
 
-  //INPUT FIELD MANAGEMENT END ==========================================================
 
 
-
-  
-  //ERROR MESSAGEs DISPLAY START ================================================================
-  
-  //FIRSTNAME FIELD
-  //modal firstname error messages
-  const firstname = document.getElementById('firstname');
-  validateElementsName(firstname, error_message);
-  hyphenFirstandLastNameManager(firstname);
-
-  
-  //LASTNAME FIELD 
-  //modal lastname error messages
-  const lastname = document.getElementById('lastname');
-  validateElementsName(lastname, error_message)
-  hyphenFirstandLastNameManager(lastname);
-  
-  
-  //EMAIL FIELD 
-  // modal email error message
-  const email = document.getElementById('email');
-  validateElementEmail(email, error_message);
-
-
-  //BIRTHDATE FIELD 
-  //modal birthdate error message
-  const birthdate = document.getElementById('birthdate');
-  validateElementBirthdateAndTournament(birthdate, error_message);
-  
-  //TOURNAMENT FIELD 
-  //modal tournament error message
-  const tournament = document.getElementById('tournament-quantity');
-  validateElementBirthdateAndTournament(tournament, error_message);
-
-
-  //ERROR MESSAGEs DISPLAY END ================================================================
-  
-
-
-
-  // //LOCATION CHECKBOX =====================================================================
-
-  //modal location validation
-  let locChecked = false;
-
-  function validateLocation() {
-    let checkboxes = document.querySelectorAll("input[name='location']");
-
-    locChecked = false;
-    checkboxes.forEach( (checkbox) => isLocated(checkbox) );
-  }
-
-  function isLocated(checkbox){
-    locChecked = checkbox.checked || locChecked;
-  }
-    
-
-
-  //SUBMIT MODAL FORM START ===========================================================
-
-  //modal submit validation form negative or positive  
-
-  let formSub = document.getElementById('form-submit');
-
-  formSub.addEventListener('click', function (canSubmit){
-
-    validateLocation()
-    console.log(locChecked)
-
-    if (locChecked !=true) {
-      canSubmit.preventDefault();
-      console.log(`can't submit`);
-
-    } else {
-      console.log('submit');
-      
-
-      //modal submit validation message
-
-      //validation message display container
-      const myBody = document.querySelector("body");
-      const myDivContainer = document.createElement("div");
-      myBody.appendChild(myDivContainer);
-      myDivContainer.classList.add("submitok");
-      setTimeout(() => {myDivContainer.style.display = "none"}, 2000);
-
-
-      //validation message --> text message
-      const myDiv = document.createElement("div");
-      myDivContainer.appendChild(myDiv);
-      myDiv.classList.add("submitok__message");
-      myDiv.textContent = data.validation.submit_validation_message;
-
-
-      //delays the reloading of the dom after validation of the form
-      const form = document.querySelector('form');
-      form.addEventListener('submit', (event) => {
-        event.preventDefault();
-        setTimeout(() => {window.location.reload();}, 2000);
-      });
-    }
-  });
-  
-  
-  //SUBMIT MODAL FORM END ===========================================================
-
-
-  //BIRTHDATE MINORS NOT ALLOWED START ===========================================================
-
+  //BIRTHDATE MINORS NOT ALLOWED START
 
   //retrieve today's date
   let todaysDate = new Date();
@@ -313,7 +289,124 @@ function doIt(data) {
     // console.log (`dateInBirthdayNewEntry : `, yearInBirthdayNewEntry);
   });
 
-  //BIRTHDATE MINORS NOT ALLOWED END ===========================================================
+  //BIRTHDATE MINORS NOT ALLOWED END 
+
+  //INPUT FIELD MANAGEMENT END ==========================================================
+
+
+
+  
+  //ERROR MESSAGES CONTENT DISPLAY START ================================================================
+  
+  //FIRSTNAME FIELD
+  //modal firstname error messages
+  const firstname = document.getElementById('firstname');
+  validateElementsName(firstname, error_message);
+  hyphenFirstandLastNameManager(firstname);
+
+  
+  //LASTNAME FIELD 
+  //modal lastname error messages
+  const lastname = document.getElementById('lastname');
+  validateElementsName(lastname, error_message)
+  hyphenFirstandLastNameManager(lastname);
+  
+  
+  //EMAIL FIELD 
+  // modal email error message
+  let email =  document.getElementById('email');
+  let emailConfirmation = document.getElementById('email-confirmation');
+  validateElementEmail(email, error_message);
+  validateElementEmail2(emailConfirmation, error_message);
+  identicalEmail(email, emailConfirmation, error_message);
+  identicalEmail2(email, emailConfirmation, error_message);
+  // validateEmail(email,emailConfirmation, error_message);
+
+
+  //BIRTHDATE FIELD 
+  //modal birthdate error message
+  const birthdate = document.getElementById('birthdate');
+  validateElementBirthdateAndTournament(birthdate, error_message);
+  
+  //TOURNAMENT FIELD 
+  //modal tournament error message
+  const tournament = document.getElementById('tournament-quantity');
+  validateElementBirthdateAndTournament(tournament, error_message);
+
+
+  //ERROR MESSAGES CONTENT DISPLAY END ================================================================
+  
+
+
+
+  //LOCATION CHECKBOX START =====================================================================
+
+  //modal location validation
+  let locChecked = false;
+
+  function validateLocation() {
+    let checkboxes = document.querySelectorAll("input[name='location']");
+
+    locChecked = false;
+    checkboxes.forEach( (checkbox) => isLocated(checkbox) );
+  }
+
+  function isLocated(checkbox){
+    locChecked = checkbox.checked || locChecked;
+  }
+    
+  //LOCATION CHECKBOX END =====================================================================
+
+
+
+  //SUBMIT MODAL FORM START ===========================================================
+
+  //modal submit validation form negative or positive  
+
+  let formSub = document.getElementById('form-submit');
+
+  formSub.addEventListener('click', function (canSubmit){
+
+    validateLocation()
+    // console.log(locChecked)
+
+    if (locChecked !=true) {
+      canSubmit.preventDefault();
+      // console.log(`can't submit`);
+
+    } else {
+      // console.log('submit');
+      
+
+  //     //modal submit validation message
+
+  //     //validation message display container
+  //     const myBody = document.querySelector("body");
+  //     const myDivContainer = document.createElement("div");
+  //     myBody.appendChild(myDivContainer);
+  //     myDivContainer.classList.add("submitok");
+  //     setTimeout(() => {myDivContainer.style.display = "none"}, 2000);
+
+
+  //     //validation message --> text message
+  //     const myDiv = document.createElement("div");
+  //     myDivContainer.appendChild(myDiv);
+  //     myDiv.classList.add("submitok__message");
+  //     myDiv.textContent = data.validation.submit_validation_message;
+
+
+  //     //delays the reloading of the dom after validation of the form
+  //     const form = document.querySelector('form');
+  //     form.addEventListener('submit', (event) => {
+  //       event.preventDefault();
+  //       setTimeout(() => {window.location.reload();}, 2000);
+  //     });
+    }
+  });
+  
+  //SUBMIT MODAL FORM END ===========================================================
+
+
 
 
 
@@ -355,12 +448,12 @@ function doIt(data) {
   //DEV END
 
 
-} //end of doIt Function
+} //END OF DO IT FUNCTION
 
 
 
 
-//CONTENT.JSON ==========================================================
+//CONTENT.JSON START ==========================================================
 
 // recovery of error or validation messages in content.json
 window.onload = async ()=>{
@@ -369,5 +462,6 @@ window.onload = async ()=>{
   .then(data => doIt(data));
 }
 
+//CONTENT.JSON END ==========================================================
 
 //MODAL FORM END =======================================================================================================================================

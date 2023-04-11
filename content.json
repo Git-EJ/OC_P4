@@ -10,6 +10,7 @@
         "two_letters_minimum" : "Veuillez entrer au minimum 2 caratères",
         "authorized_characters" : "Seules les lettres et les traits d'union sont autorisés",
         "hyphen_not_allowed_at_the_start_or_end" : "Le trait d'union ne peut être utilisé au début ou à la fin du prénom ou du nom",
-        "email_format" : "Veuillez entrer une adresse email correcte de type: \"link@zelda.com\""
+        "email_format" : "Veuillez entrer une adresse email correcte de type: \"link@zelda.com\"",
+        "email_are_not_indentical" : "Les adresses email ne sont pas identiques"
     }
 }
