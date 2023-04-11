@@ -101,14 +101,10 @@ function doIt(data) {
       } else if (inputFieldName.validity.patternMismatch && inputFieldName.validity.tooShort){
         inputFieldName.setCustomValidity(entryError.two_letters_and_authorized_characters);
         
-      } else if (inputValue.startsWith ('-') || inputValue.endsWith ('-')) {
-        inputFieldName.setCustomValidity(entryError.hyphen_not_allowed_at_the_start_or_end);
-        
       } else {
         inputFieldName.setCustomValidity("");
       }
       
-
       // inputFieldName is a dom element (inputfield) ==> object. 
       // The start/end method is a string method. So we have to convert the dom element into a string.
       // For this we retrieve the value of inputfieldname with .value and we call start/end method with this value.
@@ -120,83 +116,41 @@ function doIt(data) {
   
 
   // Validation of the email field start
-  function validateElementEmail(inputFieldName, entryError) {
+
+  function validator(inputFieldName, entryError) {
     
-    inputFieldName.addEventListener('input', function() {
-      
-      if(inputFieldName.validity.typeMismatch || inputFieldName.validity.patternMismatch) {
-        inputFieldName.setCustomValidity(entryError.email_format);
-        console.log(entryError.email_format)
-      } else {
-        inputFieldName.setCustomValidity("");
-      }
-      // console.log('IN  ' + inputFieldName.value)
-    })
-  }
-
-  function validateElementEmail2(inputFieldName2, entryError) {
+    for (let i = 0; i < inputFieldName.length; i++) {
+      inputFieldName[i].addEventListener('input', function() {
+        if (inputFieldName[i].validity.patternMismatch || inputFieldName[i].validity.typeMismatch){ //impossible to ungroup because of the Html pattern
+          inputFieldName[i].setCustomValidity(entryError.email_format);
+        }else {
+          inputFieldName[i].setCustomValidity("");
+        }
+        // console.log('patt ' + inputFieldName[i].validity.patternMismatch)
+        // console.log('type ' + inputFieldName[i].validity.typeMismatch)
+      })
+    }
+  };
     
-    inputFieldName2.addEventListener('input', function() {
-      
-      if(inputFieldName2.validity.typeMismatch || inputFieldName2.validity.patternMismatch) {
-        inputFieldName2.setCustomValidity(entryError.email_format);
-        console.log(entryError.email_format)
-      } else {
-        inputFieldName2.setCustomValidity("");
-      }
-      // console.log('IN2  ' + inputFieldName2.value)
-    })
-  }
+  
+  
+  function validator2 (inputFieldName, entryError) {
 
+    for (let i = 0; i < inputFieldName.length; i++) {
+      inputFieldName[i].addEventListener('input', function() {
+        let inputValue = inputFieldName[i].value;
+        let inputValue2 = inputFieldName[i+1].value;
+        console.log('email ' + inputValue + ' is not identical to ' + inputValue2);
 
-
-function identicalEmail(inputFieldName, inputFieldName2, entryError) {
-
-  inputFieldName.addEventListener('input', function() {
-
-    if (inputFieldName.value != inputFieldName2.value) {
-      inputFieldName.setCustomValidity(entryError.email_are_not_identical);
-      console.log('email != confirmartion')
-    } else {
-      inputFieldName.setCustomValidity("");
-      console.log('email = confirmation')
+        if (inputValue != inputValue2) {
+          inputFieldName[i].setCustomValidity(entryError.email_are_not_indentical);
+          console.log('email ' + inputFieldName[i] != inputFieldName[i+1])
+        } else {
+          inputFieldName[i].setCustomValidity("");
+        }
+      })
     }
-    // console.log(inputFieldName.value + ' ID ' + inputFieldName2.value)
-  })
-}
-
-
-
-function identicalEmail2(inputFieldName, inputFieldName2, entryError) {
-
-  inputFieldName2.addEventListener('input', function() {
-
-    if (inputFieldName2.value != inputFieldName.value) {
-      inputFieldName2.setCustomValidity(entryError.email_are_not_identical);
-      console.log('email != confirmartion')
-    } else {
-      inputFieldName2.setCustomValidity("");
-      console.log('email = confirmation')
-    }
-    // console.log(inputFieldName2.value + ' ID2 ' + inputFieldName.value)
-  })
-}
-
-// function identicalEmail(inputFieldName, inputFieldName2, entryError) {
-
-//   inputFieldName.addEventListener('input', function() {
-
-//     if ((inputFieldName.value != inputFieldName2.value) || (inputFieldName2.value != inputFieldName.value)) {
-//       inputFieldName.setCustomValidity(entryError.email_are_not_identical);
-//       console.log('email != confirmartion')
-
-//     } else if ((inputFieldName.value = inputFieldName2.value) || (inputFieldName2.value = inputFieldName.value)) {
-//       inputFieldName.setCustomValidity(entryError.email_are_not_identical);
-//       console.log('email != confirmartion')
-//     } 
-//   })
-// }
-
+  };
 
 // const email =  document.getElementById('email');
 // const emailConfirmation = document.getElementById('email-confirmation');
@@ -215,6 +169,10 @@ function identicalEmail2(inputFieldName, inputFieldName2, entryError) {
 
  //Validation of the email field end
   
+
+
+
+
 
   //Validation of the birthdate and tournament fields
   function validateElementBirthdateAndTournament(inputFieldName) {
@@ -255,7 +213,7 @@ function identicalEmail2(inputFieldName, inputFieldName2, entryError) {
     
     
     let dateInUserBirthDateValue = new Date(userBirthDateValue);
-    // console.log(`dateInUserBirthDateValue : `, dateInUserBirthDateValue)
+    console.log(`dateInUserBirthDateValue : `, dateInUserBirthDateValue)
   
     let yearInUserBirthDateValue = dateInUserBirthDateValue.getFullYear();
     // console.log (`yearInUserBirthDateValue : `, yearInUserBirthDateValue);
@@ -269,7 +227,7 @@ function identicalEmail2(inputFieldName, inputFieldName2, entryError) {
     
 
     if (year - yearInUserBirthDateValue < 18) {
-      // console.log('minors are not allowed 1st');
+      console.log('minors are not allowed 1st');
 
     } else if (((year - yearInUserBirthDateValue) === 18) && ((month - monthInUserBirthDateValue) < 0)) {
       // console.log('minors are not allowed 2nd');
@@ -314,13 +272,18 @@ function identicalEmail2(inputFieldName, inputFieldName2, entryError) {
   
   //EMAIL FIELD 
   // modal email error message
-  let email =  document.getElementById('email');
-  let emailConfirmation = document.getElementById('email-confirmation');
-  validateElementEmail(email, error_message);
-  validateElementEmail2(emailConfirmation, error_message);
-  identicalEmail(email, emailConfirmation, error_message);
-  identicalEmail2(email, emailConfirmation, error_message);
-  // validateEmail(email,emailConfirmation, error_message);
+  // let email =  document.getElementById('email');
+  // let emailConfirmation = document.getElementById('email-confirmation');
+  // validateElementEmail(email, error_message);
+  // validateElementEmail2(emailConfirmation, error_message);
+  // identicalEmail(email, emailConfirmation, error_message);
+  // identicalEmail2(email, emailConfirmation, error_message);
+  // validateEmail(email,emailConfirmation, error_message); 
+
+
+  let emailInputs = document.querySelectorAll('input[type="email"]');
+  validator(emailInputs, error_message);
+  validator2(emailInputs, error_message);
 
 
   //BIRTHDATE FIELD 
@@ -378,29 +341,29 @@ function identicalEmail2(inputFieldName, inputFieldName2, entryError) {
       // console.log('submit');
       
 
-  //     //modal submit validation message
+      //modal submit validation message
 
-  //     //validation message display container
-  //     const myBody = document.querySelector("body");
-  //     const myDivContainer = document.createElement("div");
-  //     myBody.appendChild(myDivContainer);
-  //     myDivContainer.classList.add("submitok");
-  //     setTimeout(() => {myDivContainer.style.display = "none"}, 2000);
-
-
-  //     //validation message --> text message
-  //     const myDiv = document.createElement("div");
-  //     myDivContainer.appendChild(myDiv);
-  //     myDiv.classList.add("submitok__message");
-  //     myDiv.textContent = data.validation.submit_validation_message;
+      //validation message display container
+      const myBody = document.querySelector("body");
+      const myDivContainer = document.createElement("div");
+      myBody.appendChild(myDivContainer);
+      myDivContainer.classList.add("submitok");
+      setTimeout(() => {myDivContainer.style.display = "none"}, 2000);
 
 
-  //     //delays the reloading of the dom after validation of the form
-  //     const form = document.querySelector('form');
-  //     form.addEventListener('submit', (event) => {
-  //       event.preventDefault();
-  //       setTimeout(() => {window.location.reload();}, 2000);
-  //     });
+      //validation message --> text message
+      const myDiv = document.createElement("div");
+      myDivContainer.appendChild(myDiv);
+      myDiv.classList.add("submitok__message");
+      myDiv.textContent = data.validation.submit_validation_message;
+
+
+      //delays the reloading of the dom after validation of the form
+      const form = document.querySelector('form');
+      form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        setTimeout(() => {window.location.reload();}, 2000);
+      });
     }
   });
   
