@@ -257,27 +257,64 @@ function doIt(data) {
 
   //BIRTHDATE MINORS NOT ALLOWED START ===========================================================
 
-  let todaysDate = new Date();
-  let dateOfTheDay = todaysDate.toLocaleString('fr-FR',{
-    year: 'numeric',
-    month: 'numeric',
-    day: 'numeric',
-  });
-  // console.log(`date Of The Day : ` , dateOfTheDay);
 
+  //retrieve today's date
+  let todaysDate = new Date();
+  // let dateOfTheDay = todaysDate.toLocaleString('fr-FR',{  //why date of the day not working with => .getFulleYear() .getMonth() .getDate() ?
+  //   year: 'numeric',
+  //   month: 'numeric',
+  //   day: 'numeric',
+  // });
 
   let year = todaysDate.getFullYear();
-  // console.log(`getFullYear today's date : `, year);
-  
   let monthIndexJS = todaysDate.getMonth();
   let month = monthIndexJS + 1;
-  // console.log(`getMonth today's date : `, month);
-  
   let day = todaysDate.getDate();
-  // console.log(`getDate today's date : `, day);
 
+  
+  //retrieve user birthdate
+  const userBirthdate = document.getElementById('birthdate');
+  userBirthdate.addEventListener('input', (event) => {
+    let userBirthDateValue = event.target.value;
+    
+    
+    let dateInUserBirthDateValue = new Date(userBirthDateValue);
+    // console.log(`dateInUserBirthDateValue : `, dateInUserBirthDateValue)
+  
+    let yearInUserBirthDateValue = dateInUserBirthDateValue.getFullYear();
+    // console.log (`yearInUserBirthDateValue : `, yearInUserBirthDateValue);
+  
+    let monthIndexJsUserBirthDateValue = dateInUserBirthDateValue.getMonth();
+    let monthInUserBirthDateValue = monthIndexJsUserBirthDateValue + 1;
+    // console.log (`monthInUserBirthDateValue : `, monthInUserBirthDateValue);
+  
+    let dayInUserBirthdateValue = dateInUserBirthDateValue.getDate();
+    // console.log (`dayInUserBirthdateValue : `, dayInUserBirthdateValue);
+    
+
+    if (year - yearInUserBirthDateValue < 18) {
+      // console.log('minors are not allowed 1st');
+
+    } else if (((year - yearInUserBirthDateValue) === 18) && ((month - monthInUserBirthDateValue) < 0)) {
+      // console.log('minors are not allowed 2nd');
+
+    } else if (((year - yearInUserBirthDateValue) === 18) && ((month - monthInUserBirthDateValue) === 0) && ((day - dayInUserBirthdateValue) < 0)) {
+      // console.log('minors are not allowed 3rd');
+    
+      // nan => because for example 31 april doesn't exist. If the date doesn't exist it returns NaN.
+    } else if (isNaN(dayInUserBirthdateValue, monthInUserBirthDateValue, yearInUserBirthDateValue) === true) {
+      // console.log('date error');
+
+    } else { 
+      console.log('you are allowed');
+    }
+
+    // let yearInBirthdayNewEntry = birthDateNewEntry.getFullYear();     //?????????????? why doesn't work ?????? object matter?
+    // console.log (`dateInBirthdayNewEntry : `, yearInBirthdayNewEntry);
+  });
 
   //BIRTHDATE MINORS NOT ALLOWED END ===========================================================
+
 
 
 
@@ -288,7 +325,7 @@ function doIt(data) {
   btnClick.click();
 
 
-  // //value befor user entry
+  // //form all values befor user entry
   // const form = document.querySelector('form');
   // const inputsValue = form.querySelectorAll('input');
   
@@ -296,64 +333,23 @@ function doIt(data) {
   //   console.log(inputsValue.value);
   // });
 
-  // //value after user entry
+  // //form all values after user entry
   // form.addEventListener('input', (event) => {
   //   console.log(event.target.value);
   // });
 
 
-  //value before user entry for birthdate
+  // //value before user entry for birthdate
   // const birthDate = document.getElementById('birthdate').value;
   // console.log(`Before entry : ` , birthDate);
 
-  // //value after user entry for birthdate
- 
-    const birthDateAfter = document.getElementById('birthdate');
-    birthDateAfter.addEventListener('input', (event) => {
-      let birthDateNewEntry = event.target.value;
-      console.log(`After entry : ` , birthDateNewEntry);
 
-      let dateInBirthDateNewEntry = new Date(birthDateNewEntry);
-      console.log(`dateInBirthdayNewEntry : `, dateInBirthDateNewEntry)
-
-      let yearInBirthdayNewEntry = dateInBirthDateNewEntry.getFullYear();
-      console.log (`yearInBirthdayNewEntry : `, yearInBirthdayNewEntry);
-
-      let monthIndexJSInBirthdayNewEntry = dateInBirthDateNewEntry.getMonth();
-      let monthInBirthdayNewEntry = monthIndexJSInBirthdayNewEntry + 1;
-      console.log (`monthInBirthdayNewEntry : `, monthInBirthdayNewEntry);
-
-      let dayInBirthdayNewEntry = dateInBirthDateNewEntry.getDate();
-      console.log (`dayInBirthdayNewEntry : `, dayInBirthdayNewEntry);
-      //devstart
-      let calculateYear = year - yearInBirthdayNewEntry;
-      console.log(`calculateYear : `, calculateYear);
-  
-      let calculateMonth = month - monthInBirthdayNewEntry;
-       console.log(`calculateMonth : `, calculateMonth);
-  
-      let calculateDay = day - dayInBirthdayNewEntry;
-        console.log(`calculateDay : `, calculateDay);
-      //dev end
-
-      if (year - yearInBirthdayNewEntry < 18) {
-        console.log('minors are not allowed 1st if');
-
-      } else if (((year - yearInBirthdayNewEntry) === 18) && ((month - monthInBirthdayNewEntry) < 0)) {
-        console.log('minors are not allowed 2nd if');
-
-      } else if (((year - yearInBirthdayNewEntry) === 18) && ((month - monthInBirthdayNewEntry) === 0) && ((day - dayInBirthdayNewEntry) < 0)) {
-        console.log('minors are not allowed 3rd if');
-
-      } else { 
-        console.log('you are allowed');
-      }
-
-      // let yearInBirthdayNewEntry = birthDateNewEntry.getFullYear();     //?????????????? why doesn't work ?????? object matter?
-      // console.log (`dateInBirthdayNewEntry : `, yearInBirthdayNewEntry);
-    });
-    
-    
+  // // value after user entry for birthdate
+  //   const devBirthDateAfter = document.getElementById('birthdate');
+  //   devBirthDateAfter.addEventListener('input', (event) => {
+  //     let devBirthDateNewEntry = event.target.value;
+  //     console.log(`After entry : ` , devBirthDateNewEntry);
+  //   });
     
 
   //DEV END
