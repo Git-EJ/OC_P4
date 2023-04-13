@@ -71,28 +71,28 @@
             <div class="formData">
               <label for="firstname">Prénom</label>
               <br>
-              <input class="text-control" type="text" id="firstname" name="firstname" value="dsk" minlength="2" maxlength='40' pattern="^[a-zA-ZÀ-ÿ][a-zA-ZÀ-ÿ\s\-]*[a-zA-ZÀ-ÿ]$" required>
+              <input class="text-control" type="text" id="firstname" name="firstname" value="" minlength="2" maxlength='40' pattern="^[a-zA-ZÀ-ÿ][a-zA-ZÀ-ÿ\s\-]*[a-zA-ZÀ-ÿ]$" required>
               <br>
             </div>
 
             <div class="formData">
               <label for="lastname">Nom</label>
               <br>
-              <input class="text-control" type="text" id="lastname" name="lastname" value="ee" minlength="2" maxlength='40' pattern="^[a-zA-ZÀ-ÿ][a-zA-ZÀ-ÿ\s\-]*[a-zA-ZÀ-ÿ]$" required>
+              <input class="text-control" type="text" id="lastname" name="lastname" value="" minlength="2" maxlength='40' pattern="^[a-zA-ZÀ-ÿ][a-zA-ZÀ-ÿ\s\-]*[a-zA-ZÀ-ÿ]$" required>
               <br>
             </div>
 
             <div class="formData">
               <label for="email">E-mail</label>
               <br>
-              <input class="text-control" type="email" id="email" name="email" placeholder="exemple@domaine.com" value="" pattern="^[\w.%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}$" required>
+              <input class="text-control" type="email" id="email" name="email" placeholder="exemple@domaine.com" value="a@b.com" pattern="^[\w.%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}$" required>
               <br>
             </div>
 
             <div class="formData">
               <label for="email-confirmation"><i>E-mail - Confirmation</i></label>
               <br> 
-              <input class="text-control" type="email" id="email-confirmation" name="email-confirmation" placeholder="exemple@domaine.com" value="" pattern=^[\w.%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}$ required>
+              <input class="text-control" type="email" id="email-confirmation" name="email-confirmation" placeholder="exemple@domaine.com" value="a@b.com" pattern=^[\w.%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}$ required>
               <br>
             </div>
 
@@ -185,7 +185,8 @@
     </p>
   </footer>
 
-  <script src="modal.js"></script>
+  <script src="./js/validator.js"></script>
+  <script src="./modal.js"></script>
 
 </body>
 
