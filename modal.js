@@ -16,7 +16,7 @@ function editNav() {
 
 
 
-// REGEX START ==========================================================
+// REGEX TOURNAMENT START ==========================================================
 
 function regexTournament(event) {
   // only numbers 0 to 9
@@ -28,7 +28,7 @@ function regexTournament(event) {
   }
 }
 
-// REGEX END ==========================================================
+// REGEX TOURNAMENT END ==========================================================
 
 
 
@@ -108,7 +108,7 @@ function doIt(data) {
   //BIRTHDATE FIELD 
   //modal birthdate error message
   const birthdate = document.getElementById('birthdate');
-  Validator.validateElementBirthdateAndTournament(birthdate, error_message);
+  Validator.validateElementsBirthdateAndTournament(birthdate, error_message);
   Validator.isMajor(birthdate, error_message);
 
   //TOURNAMENT FIELD 

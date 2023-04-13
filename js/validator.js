@@ -69,9 +69,12 @@ const Validator = {
       if (strCopy !== strSource) {
         elemCopy.setCustomValidity(entryError.email_are_not_identical);
         event.stopPropagation();
-        console.log("c'est pas le même")
+      } else {
+        elemCopy.setCustomValidity("");
       }
     }
+
+
     elemCopy.addEventListener('input', func)
     elemSource.addEventListener('input', func)
   },
@@ -80,9 +83,9 @@ const Validator = {
 
 
   // VALIDATION OF THE BIRTHDATE AND TOURNAMENT FIELDS START
-  validateElementsBirthdateAndTournament :(inputFieldName) => {
-
+  validateElementsBirthdateAndTournament: (inputFieldName) => {
     inputFieldName.addEventListener('input', function () {
+      console.log('toto')
 
       const birthdateValue = document.getElementById('birthdate').value;
       const tournamentValue = document.getElementById('tournament-quantity').value;
