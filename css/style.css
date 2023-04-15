@@ -133,6 +133,11 @@ input:focus:valid {
   border: 2px solid #279e7a;
 }
 
+.form-error-message {
+  color: #FF001B;
+  font-size: 12px;
+}
+
 .text-control {
   margin: 0;
   padding: 8px;
@@ -180,6 +185,10 @@ input:focus:valid {
   transform: translate(-50%, -50%);
   transition: 0.3s;
   opacity: 0;
+}
+.checkbox-label .checkbox-icon::after .empty-location,
+.checkbox2-label .checkbox-icon::after .empty-location {
+  background: #FF001B;
 }
 
 .checkbox-input {

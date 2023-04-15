@@ -1,7 +1,20 @@
 const Validator = {
 
   // FIELD ARE NOT EMPTY START
-  fieldRequired: (entryError) => {
+
+  // Before value entry for valueMissingv  
+  // ==>  need it because if the fields are empty and no values have been entered, 
+  //      the generic message is displayed ans not the personalized message
+  fieldRequiredBeforeUserEntry: (inputFieldName, entryError) => {
+    for (let i = 0; i < inputFieldName.length; i++) {
+      if (inputFieldName[i].value === ""){
+        inputFieldName[i].setCustomValidity(entryError.required_field);
+      }
+    }
+  },
+
+  // Aftervalue entry for valueMissing
+  fieldRequiredAfterUserEntry: (entryError) => {
     document.addEventListener('input', function (event) {
       if (event.target.value === "") {
         event.target.setCustomValidity(entryError.required_field);
@@ -85,7 +98,6 @@ const Validator = {
   // VALIDATION OF THE BIRTHDATE AND TOURNAMENT FIELDS START
   validateElementsBirthdateAndTournament: (inputFieldName) => {
     inputFieldName.addEventListener('input', function () {
-      console.log('toto')
 
       const birthdateValue = document.getElementById('birthdate').value;
       const tournamentValue = document.getElementById('tournament-quantity').value;
@@ -103,7 +115,7 @@ const Validator = {
   isMajor: (inputFieldName, entryError) => {
     // retrieve today's date
     let todaysDate = new Date();
-    console.log(todaysDate);
+    document.getElementById('birthdate').setAttribute('max', todaysDate); // set the max date in the html input type=date
 
     inputFieldName.addEventListener('input', (event) => {
       const age = new Date(todaysDate - new Date(event.target.value).getTime()).getFullYear() - 1970
@@ -122,6 +134,16 @@ const Validator = {
     })
   },
   // BIRTHDATE MINORS NOT ALLOWED END 
+
+  
+
+
+  // VALIDATION OF THE CITY FIELD START
+
+
+
+
+  // VALIDATION OF THE CITY FIELD END
 
 
 

@@ -14,6 +14,7 @@
         "email_are_not_identical" : "Les adresses email ne sont pas identiques",
         "birthdate_format" : "Veuillez entrer une date de naissance correcte de type: \"01/01/1990\"",
         "minors_are_not_allowed" : "Vous devez avoir plus de 18 ans pour participer",
-        "date_error" : "Veuillez entrer une date correcte"
+        "date_error" : "Veuillez entrer une date correcte",
+        "empty_location" : "Veuillez choisir une ville"
     }
 }

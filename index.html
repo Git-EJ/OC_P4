@@ -99,21 +99,21 @@
             <div class="formData">
               <label for="birthdate">Date de naissance</label>
               <br>
-              <input class="text-control" type="date" id="birthdate" name="birthdate" value="2005-04-01" min="1923-01-01" max="2023-12-12" required>
+              <input class="text-control" type="date" id="birthdate" name="birthdate" value="2005-04-01" min="1923-01-01" max="" required>
               <br>
             </div>
 
             <div class="formData">
               <label for="tournament-quantity">À combien de tournois GameOn avez-vous déjà participé ?</label>
               <br>
-              <input type="number" class="text-control" id="tournament-quantity" name="tournament-quantity" value="" min="0" max="99" oninput="regexTournament(event)" required>
+              <input type="number" class="text-control" id="tournament-quantity" name="tournament-quantity" value="1" min="0" max="99" oninput="regexTournament(event)" required>
             </div>
 
             <p class="text-label">A quel tournoi souhaitez-vous participer cette année ?</p>
 
             <div class="formData">
 
-              <input class="checkbox-input" type="radio" id="location1" name="location" value="New York" checked>
+              <input class="checkbox-input" type="radio" id="location1" name="location" value="New York">
               <label class="checkbox-label" for="location1">
                 <span class="checkbox-icon"></span>
                 New York
@@ -149,6 +149,8 @@
                 Portland
               </label>
             </div>
+
+            <div class="form-error-message" id="location-error-message"></div>
 
             <div class="formData">
 

@@ -80,7 +80,9 @@ function doIt(data) {
   //ERROR MESSAGES CONTENT DISPLAY START ================================================================
 
   // After value entry for valueMissing
-  Validator.fieldRequired(error_message);
+  const allInputs = document.querySelectorAll('input[required]');
+  Validator.fieldRequiredBeforeUserEntry(allInputs, error_message);
+  Validator.fieldRequiredAfterUserEntry(error_message);
 
   //FIRSTNAME FIELD
   //modal firstname error messages
@@ -116,26 +118,44 @@ function doIt(data) {
   const tournament = document.getElementById('tournament-quantity');
   Validator.validateElementsBirthdateAndTournament(tournament, error_message);
 
+  // LOCATION FIELD
+  // modal location error message
+  // const location = document.querySelectorAll('input[name="location"]');
+  // Validator.cityLocation(location, error_message);
 
-  //ERROR MESSAGES CONTENT DISPLAY END ================================================================
+
+  //ERROR MESSAGES CONTENT DISPLAY END ==================================================================
 
 
-
-
+  
   //LOCATION CHECKBOX START =====================================================================
 
-  //modal location validation
+
+  const invalidBgColor = document.getElementsByClassName('.checkbox-label .checkbox-icon::after, .checkbox2-label .checkbox-icon::after');
+  const checkboxes = document.querySelectorAll("input[name='location']");
+  const emptyLocation = error_message;
   let locChecked = false;
 
+  //checkboxes listenner
+  checkboxes.forEach((checkbox) => {
+    checkbox.addEventListener('click', validateLocation); //validateLocation erase the error message before submit (callback => validateLocation)
+  });
+
+  //location validation and error message display
   function validateLocation() {
-    let checkboxes = document.querySelectorAll("input[name='location']");
+    checkboxes.forEach((checkbox) => {
+      if (checkbox.checked) {
+        locChecked = true;
+      }
+    });
+    
+    if (locChecked) {
+      document.getElementById('location-error-message').innerHTML = '';
+    } else {
+      document.getElementById('location-error-message').innerHTML = emptyLocation.empty_location;
+      invalidBgColor.classList.add('empty-location');
 
-    locChecked = false;
-    checkboxes.forEach((checkbox) => isLocated(checkbox));
-  }
-
-  function isLocated(checkbox) {
-    locChecked = checkbox.checked || locChecked;
+    }
   }
 
   //LOCATION CHECKBOX END =====================================================================
@@ -161,9 +181,11 @@ function doIt(data) {
       // console.log('submit');
 
 
-      //modal submit validation message
 
-      //validation message display container
+
+      // modal submit validation message
+
+      // validation message display container
       const myBody = document.querySelector("body");
       const myDivContainer = document.createElement("div");
       myBody.appendChild(myDivContainer);
