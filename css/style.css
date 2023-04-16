@@ -138,6 +138,10 @@ input:focus:valid {
   font-size: 12px;
 }
 
+.terms-padding {
+  padding-left: 2.3rem;
+}
+
 .text-control {
   margin: 0;
   padding: 8px;
@@ -168,10 +172,6 @@ input:focus:valid {
   left: -30px;
   top: -1px;
   transition: 0.3s;
-}
-
-.empty-location {
-  border: 2px solid #FF001B;
 }
 
 .checkbox-label .checkbox-icon::after,

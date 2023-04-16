@@ -110,18 +110,25 @@ function doIt(data) {
   //BIRTHDATE FIELD 
   //modal birthdate error message
   const birthdate = document.getElementById('birthdate');
-  Validator.validateElementsBirthdateAndTournament(birthdate, error_message);
+  Validator.validateElementsBirthdateAndTournament(birthdate);
   Validator.isMajor(birthdate, error_message);
 
   //TOURNAMENT FIELD 
   //modal tournament error message
   const tournament = document.getElementById('tournament-quantity');
-  Validator.validateElementsBirthdateAndTournament(tournament, error_message);
+  Validator.validateElementsBirthdateAndTournament(tournament);
 
   // LOCATION FIELD
   // modal location error message
-  // const location = document.querySelectorAll('input[name="location"]');
-  // Validator.cityLocation(location, error_message);
+  const checkboxes = document.querySelectorAll("input[name='location']");
+  const invalidLocationBorderColor = document.querySelectorAll('.checkbox-label .checkbox-icon');
+  const emptyLocationMessage = error_message;
+  let locChecked = false;
+  // Validator.cityLocation(checkboxes);
+  // Validator.validateLocation(checkboxes, invalidLocationBorderColor, emptyLocationMessage, locChecked);
+  
+  //TERMS AND CONDITIONS FIELD
+
 
 
   //ERROR MESSAGES CONTENT DISPLAY END ==================================================================
@@ -129,12 +136,6 @@ function doIt(data) {
 
   
   //LOCATION CHECKBOX START =====================================================================
-
-  const checkboxes = document.querySelectorAll("input[name='location']");
-  const invalidLocationBorderColor = document.querySelectorAll('.checkbox-label .checkbox-icon');
-  document.documentElement.style.setProperty('--primary-color', '#FF001B');
-  const emptyLocation = error_message;
-  let locChecked = false;
 
   //checkboxes listenner
   checkboxes.forEach((checkbox) => {
@@ -156,13 +157,50 @@ function doIt(data) {
       })
 
     } else {
-      document.getElementById('location-error-message').innerHTML = emptyLocation.empty_location;
+      document.documentElement.style.setProperty('--primary-color', '#FF001B');
+      document.getElementById('location-error-message').innerHTML = emptyLocationMessage.empty_location;
       invalidLocationBorderColor.forEach((border) => {
         border.style.border = '2px solid var(--primary-color)';
       })
     }
   }
+  
   //LOCATION CHECKBOX END =====================================================================
+
+
+  // TERMS AND CONDITIONS CHECKBOX START =====================================================================
+
+  const terms = document.getElementById('checkbox1');
+  const termsStyle = document.getElementById('terms-style');
+  const emptyTermsMessage = error_message;
+  let termsChecked = false;
+  
+  terms.addEventListener('click', validateTerms);
+    
+
+  function validateTerms () {
+    if(terms.checked){
+      termsChecked = true;
+      console.log(terms.checked)
+    }
+    
+    
+    if (termsChecked){
+      document.getElementById('terms-error-message').innerHTML = '';
+      termsStyle.style.border = '';
+      
+    } else {
+      document.documentElement.style.setProperty('--primary-color', '#FF001B');
+      document.getElementById('terms-error-message').innerHTML = emptyTermsMessage.empty_terms;
+      termsStyle.style.border = '2px solid var(--primary-color)';
+      console.log(terms)
+    }
+  }
+
+
+  // TERMS AND CONDITIONS CHECKBOX END =======================================================================
+
+
 
 
 
@@ -176,8 +214,10 @@ function doIt(data) {
 
     validateLocation()
     // console.log(locChecked)
+    validateTerms();
+    // console.log(termsChecked)
 
-    if (locChecked != true) {
+    if (locChecked != true || termsChecked !=true) {
       canSubmit.preventDefault();
       // console.log(`can't submit`);
 
