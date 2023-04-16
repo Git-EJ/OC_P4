@@ -130,9 +130,9 @@ function doIt(data) {
   
   //LOCATION CHECKBOX START =====================================================================
 
-
-  const invalidBgColor = document.getElementsByClassName('.checkbox-label .checkbox-icon::after, .checkbox2-label .checkbox-icon::after');
   const checkboxes = document.querySelectorAll("input[name='location']");
+  const invalidLocationBorderColor = document.querySelectorAll('.checkbox-label .checkbox-icon');
+  document.documentElement.style.setProperty('--primary-color', '#FF001B');
   const emptyLocation = error_message;
   let locChecked = false;
 
@@ -151,13 +151,17 @@ function doIt(data) {
     
     if (locChecked) {
       document.getElementById('location-error-message').innerHTML = '';
+      invalidLocationBorderColor.forEach((border) => {
+        border.style.border = '';
+      })
+
     } else {
       document.getElementById('location-error-message').innerHTML = emptyLocation.empty_location;
-      invalidBgColor.classList.add('empty-location');
-
+      invalidLocationBorderColor.forEach((border) => {
+        border.style.border = '2px solid var(--primary-color)';
+      })
     }
   }
-
   //LOCATION CHECKBOX END =====================================================================
 
 

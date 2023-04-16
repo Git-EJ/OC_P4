@@ -170,6 +170,10 @@ input:focus:valid {
   transition: 0.3s;
 }
 
+.empty-location {
+  border: 2px solid #FF001B;
+}
+
 .checkbox-label .checkbox-icon::after,
 .checkbox2-label .checkbox-icon::after {
   content: "";
@@ -185,10 +189,6 @@ input:focus:valid {
   transform: translate(-50%, -50%);
   transition: 0.3s;
   opacity: 0;
-}
-.checkbox-label .checkbox-icon::after .empty-location,
-.checkbox2-label .checkbox-icon::after .empty-location {
-  background: #FF001B;
 }
 
 .checkbox-input {

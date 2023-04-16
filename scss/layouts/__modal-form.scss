@@ -108,6 +108,10 @@ input {
   transition: 0.3s;
 }
 
+.empty-location {
+ border: 2px solid $primary-color;
+}
+
 .checkbox-label .checkbox-icon::after,
 .checkbox2-label .checkbox-icon::after {
   content: "";
@@ -123,10 +127,6 @@ input {
   transform: translate(-50%, -50%);
   transition: 0.3s;
   opacity: 0;
-
-  & .empty-location{
-    background: $primary-color;
-  }
 }
 
 .checkbox-input {
