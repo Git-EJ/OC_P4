@@ -121,11 +121,12 @@ const Validator = {
   isMajor: (inputFieldName, entryError) => {
     // retrieve today's date
     let todaysDate = new Date();
+    let dateOfEvent = new Date('2023-09-23');
     document.getElementById('birthdate').setAttribute('max', todaysDate.toISOString().split('T')[0]); // set the max value in the html input type=date
-    // toISOString() returns a string in the format YYYY-MM-DD
-    // split('T') separate date and time
+                                                                                                      // toISOString() returns a string in the format YYYY-MM-DD
+                                                                                                      // split('T') separate date and time
     inputFieldName.addEventListener('input', (event) => {                                                                                                //[0] return the date without the time (first array element)
-      const age = new Date(todaysDate - new Date(event.target.value).getTime()).getFullYear() - 1970
+      const age = new Date(dateOfEvent - new Date(event.target.value).getTime()).getFullYear() - 1970
       
       if (isNaN(age)) {
         console.log("NaN", entryError.date_error);
