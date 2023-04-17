@@ -5,12 +5,12 @@
 
 
     "error": {
-        "required_field" : "Ce champ est obligatoire oooookkkkkkkkkkkk!!!!",
+        "required_field" : "Ce champ est obligatoire",
         "two_letters_and_authorized_characters" : "Utilisation de caractère(s) non autorisé(s) et 2 caractères minimum doivent être saisis",
         "two_letters_minimum" : "Veuillez entrer au minimum 2 caratères",
         "authorized_characters" : "Seules les lettres et les traits d'union sont autorisés",
         "hyphen_not_allowed_at_the_start_or_end" : "Le trait d'union ne peut être utilisé au début ou à la fin du prénom ou du nom",
-        "email_format" : "Veuillez entrer une adresse email correcte de type: \"link@zelda.com\"",
+        "email_format" : "Veuillez entrer une adresse email correcte de type: \"example@domaine.com\"",
         "email_are_not_identical" : "Les adresses email ne sont pas identiques",
         "birthdate_format" : "Veuillez entrer une date de naissance correcte de type: \"01/01/1990\"",
         "minors_are_not_allowed" : "Vous devez avoir plus de 18 ans pour participer",

@@ -128,7 +128,12 @@ function doIt(data) {
   // Validator.validateLocation(checkboxes, invalidLocationBorderColor, emptyLocationMessage, locChecked);
   
   //TERMS AND CONDITIONS FIELD
-
+  const terms = document.getElementById('checkbox1');
+  const termsStyle = document.getElementById('terms-style');
+  const emptyTermsMessage = error_message;
+  let termsChecked = false;
+  console.log(termsChecked)
+  
 
 
   //ERROR MESSAGES CONTENT DISPLAY END ==================================================================
@@ -164,25 +169,23 @@ function doIt(data) {
       })
     }
   }
-  
   //LOCATION CHECKBOX END =====================================================================
+
 
 
   // TERMS AND CONDITIONS CHECKBOX START =====================================================================
 
-  const terms = document.getElementById('checkbox1');
-  const termsStyle = document.getElementById('terms-style');
-  const emptyTermsMessage = error_message;
-  let termsChecked = false;
-  
+  //checkbox listenner
   terms.addEventListener('click', validateTerms);
     
-
+  //terms and conditions validation and error message display
   function validateTerms () {
     if(terms.checked){
       termsChecked = true;
-      console.log(terms.checked)
+    } else if (!terms.checked){ 
+      termsChecked = false;
     }
+    console.log(terms.checked)
     
     
     if (termsChecked){
@@ -196,11 +199,7 @@ function doIt(data) {
       console.log(terms)
     }
   }
-
-
   // TERMS AND CONDITIONS CHECKBOX END =======================================================================
-
-
 
 
 
@@ -209,20 +208,18 @@ function doIt(data) {
   //modal submit validation form negative or positive  
 
   let formSub = document.getElementById('form-submit');
-
+  
   formSub.addEventListener('click', function (canSubmit) {
 
-    validateLocation()
-    // console.log(locChecked)
-    validateTerms();
-    // console.log(termsChecked)
+  validateLocation();
+  validateTerms();
 
-    if (locChecked != true || termsChecked !=true) {
+    if (firstname.value === '' || lastname.value === '' || emailInputs.value === '' || birthdate.value === '' || tournament.value === '') {
+
+    }  else if (locChecked != true || termsChecked != true) {
       canSubmit.preventDefault();
-      // console.log(`can't submit`);
-
+    
     } else {
-      // console.log('submit');
 
 
 
