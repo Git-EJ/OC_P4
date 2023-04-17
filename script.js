@@ -258,7 +258,7 @@ function doIt(data) {
   //DEV START
 
   //modal automatic spawn (simulates a click automatically)
-  document.querySelector('.btn-signup.modal-btn').click();
+  // document.querySelector('.btn-signup.modal-btn').click();
 
   //DEV END
 
