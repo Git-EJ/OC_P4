@@ -1,4 +1,3 @@
-
 // DISPLAY START ==========================================================
 
 // manages the display of the nav in low resolutions
@@ -11,16 +10,11 @@ function editNav() {
     x.className = "topnav";
   }
 }
-
 // DISPLAY END ==========================================================
 
 
 
 // REGEX TOURNAMENT START ==========================================================
-
-
-
-
 function regexTournament(event) {
   const target = event.target;
   // only numbers 0 to 9
@@ -31,7 +25,6 @@ function regexTournament(event) {
     target.value = target.value.slice(0, 2);
   }
 }
-
 // REGEX TOURNAMENT END ==========================================================
 
 
@@ -119,7 +112,6 @@ function doIt(data) {
   birthdate.addEventListener('input', function (event)  {
     if (!Validator.elementBirthdate(birthdate)) event.stopPropagation()
     if (!Validator.isMajor(birthdate, error_message)) event.stopPropagation()
-    console.log(birthdate.value)
   })
 
 
@@ -140,15 +132,11 @@ function doIt(data) {
   const termStyle = document.getElementById('terms-style');
   const emptyTermMessage = error_message;
 
-  
-
-
   //ERROR MESSAGES CONTENT DISPLAY END ==================================================================
 
 
   
   //LOCATION CHECKBOX START =====================================================================
-
   // location checkboxes listenner
   checkboxes.forEach((checkbox) => {
     checkbox.addEventListener('click', () =>{
@@ -157,33 +145,12 @@ function doIt(data) {
   });
   //LOCATION CHECKBOX END =====================================================================
 
+
   // //TERMS AND CONDITIONS CHECKBOX START =====================================================================
   // terms checkboxes listenner
   term.addEventListener('click', () =>{
     Validator.elementTerm (term, termStyle, emptyTermMessage)
   });
-
-
-
-  // TERMS AND CONDITIONS CHECKBOX START =====================================================================
-
-  // //terms and conditions validation and error message display
-  // function validateTerms () {
-  //   if (!terms.checked) {
-  //     document.documentElement.style.setProperty('--primary-color', '#FF001B');
-  //     document.getElementById('terms-error-message').innerHTML = emptyTermsMessage.empty_terms;
-  //     termsStyle.style.border = '2px solid var(--primary-color)';
-  //     return false
-  //   }
-    
-  //   document.getElementById('terms-error-message').innerHTML = '';
-  //   termsStyle.style.border = '';
-  //   return true
-  // }
-
-  // //terms checkbox listenner
-  // terms.addEventListener('click', validateTerms);
-  
   // TERMS AND CONDITIONS CHECKBOX END =======================================================================
 
   
@@ -288,44 +255,13 @@ function doIt(data) {
   //SUBMIT MODAL FORM END ===========================================================
 
 
-
-
-
-
   //DEV START
 
-  // [DEBUG] modal automatic spawn (simulates a click automatically)
+  //modal automatic spawn (simulates a click automatically)
   document.querySelector('.btn-signup.modal-btn').click();
 
-
-  // //form all values befor user entry
-  // const form = document.querySelector('form');
-  // const inputsValue = form.querySelectorAll('input');
-
-  // inputsValue.forEach(inputsValue => {
-  //   console.log(inputsValue.value);
-  // });
-
-  // //form all values after user entry
-  // form.addEventListener('input', (event) => {
-  //   console.log(event.target.value);
-  // });
-
-
-  // //value before user entry for birthdate
-  // const birthDate = document.getElementById('birthdate').value;
-  // console.log(`Before entry : ` , birthDate);
-
-
-  // // value after user entry for birthdate
-  //   const devBirthDateAfter = document.getElementById('birthdate');
-  //   devBirthDateAfter.addEventListener('input', (event) => {
-  //     let devBirthDateNewEntry = event.target.value;
-  //     console.log(`After entry : ` , devBirthDateNewEntry);
-  //   });
-
-
   //DEV END
+
 
 
 } //END OF DO IT FUNCTION

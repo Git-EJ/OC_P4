@@ -1,7 +1,5 @@
 // [TODO] /** JSDOC */
 
-
-
 const Validator = {
 
   // FIELD ARE NOT EMPTY START
