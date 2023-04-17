@@ -14,10 +14,6 @@
   }
 }
 
-// .smFont {
-//   font-size: 16px;
-// }
-
 .bground {
   display: none;
   position: fixed;
@@ -31,7 +27,7 @@
 }
 
 .content {
-  margin: 5% auto;
+  margin: 3% auto;
   width: 100%;
   max-width: 500px;
   animation-name: modalopen;
@@ -46,12 +42,25 @@
 
 .modal-body {
   padding: 15px 8%;
-  margin: 15px auto;
+}
+
+.date-of-event {
+  display: flex;
+  flex-wrap: nowrap;
+  margin-bottom: 1rem;
+  padding-right: 2rem;
+  font-size: clamp(1rem, 5vw, 1.5rem);
+  font-family:$font-roboto;
+  color: $tertiary-color;
+  background: linear-gradient(90deg, rgb(14, 226, 163) 0%, $tertiary-color 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 label {
   font-family: $font-default;
-  font-size: 17px;
+  font-size: $clamp-for-formData-label;
   font-weight: normal;
   display: inline-block;
   margin-bottom: 11px;
@@ -85,7 +94,7 @@ input {
   padding: 8px;
   width: 100%;
   border-radius: 8px;
-  font-size: 20px;
+  font-size: $clamp-for-formData-input-text-control;
   height: 48px;
 }
 
@@ -93,7 +102,7 @@ input {
 .checkbox2-label {
   position: relative;
   margin-left: 36px;
-  font-size: 12px;
+  font-size: $clamp-for-formData-checkbox-label;
   font-weight: normal;
 }
 
@@ -192,20 +201,28 @@ input {
 
 .btn-submit,
 .btn-signup {
-  background: $primary-color;
-  display: block;
+  width:60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: 0 auto;
+  padding: 12px 82px;
+  background: $primary-color;
+  border: 0;
   border-radius: 7px;
   font-size: 1rem;
-  padding: 12px 82px;
   color: #fff;
   cursor: pointer;
-  border: 0;
+  transition: transform 0.5s cubic-bezier(0.2, 0.5, 0.3, 2);
+
+  &:hover {
+      transform: scale(1.2);
+  }
 }
 
 .text-label {
   font-weight: normal;
-  font-size: 16px;
+  font-size: $clamp-for-formData-label;
 }
 
 

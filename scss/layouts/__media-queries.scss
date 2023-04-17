@@ -28,6 +28,9 @@
 }
   
 @media screen and (max-width: 540px) {
+  main{
+    margin: 0;
+  }
   .topnav a {
     display: none;
   }
@@ -35,7 +38,6 @@
   .topnav a.icon {
     float: right;
     display: block;
-    margin-top: -15px;
   }
 }
 
@@ -52,6 +54,8 @@
     background: #fff;
     color: #000;
     padding: 20px;
+    min-width:auto;
+    max-width:100%;
   }
 
   .hero-section__content::after {
@@ -63,13 +67,13 @@
   }
 
   .hero-section__content__headline {
-    font-size: 4.5rem;
+    font-size: clamp(1.6rem, 8vw, 10rem);
     white-space: normal;
   }
 
   .hero-section__content__text {
     width: unset;
-    font-size: 1.5rem;
+    font-size: clamp(1rem, 3vw, 8rem);
   }
 
   .hero-section__img img {
@@ -79,8 +83,11 @@
 
   .hero-section>.btn-signup {
     display: block;
+    text-align: center;
     margin: 32px auto 10px;
-    padding: 12px 35px;
+    padding: 1rem 0;
+    font-size: clamp(0.8rem, 4vw, 1.5rem);
+
   }
 
   .copyrights {

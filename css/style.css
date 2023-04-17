@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 * {
   box-sizing: border-box;
   margin: 0;
@@ -11,17 +13,13 @@ body {
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  font-family: "DM Sans", Arial, Helvetica, sans-serif;
+  font-family: "DM Sans", sans-serif;
   font-size: 18px;
 }
 
 p {
   margin-bottom: 0;
   padding: 0.5vw;
-}
-
-img {
-  padding-right: 1rem;
 }
 
 main {
@@ -95,7 +93,7 @@ main {
 }
 
 .content {
-  margin: 5% auto;
+  margin: 3% auto;
   width: 100%;
   max-width: 500px;
   animation-name: modalopen;
@@ -110,12 +108,25 @@ main {
 
 .modal-body {
   padding: 15px 8%;
-  margin: 15px auto;
+}
+
+.date-of-event {
+  display: flex;
+  flex-wrap: nowrap;
+  margin-bottom: 1rem;
+  padding-right: 2rem;
+  font-size: clamp(1rem, 5vw, 1.5rem);
+  font-family: "Roboto", sans-serif;
+  color: #279e7a;
+  background: linear-gradient(90deg, rgb(14, 226, 163) 0%, #279e7a 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 label {
-  font-family: "DM Sans", Arial, Helvetica, sans-serif;
-  font-size: 17px;
+  font-family: "DM Sans", sans-serif;
+  font-size: clamp(0.8rem, 4vw, 1rem);
   font-weight: normal;
   display: inline-block;
   margin-bottom: 11px;
@@ -147,7 +158,7 @@ input:focus:valid {
   padding: 8px;
   width: 100%;
   border-radius: 8px;
-  font-size: 20px;
+  font-size: clamp(1rem, 5vw, 1.3rem);
   height: 48px;
 }
 
@@ -155,7 +166,7 @@ input:focus:valid {
 .checkbox2-label {
   position: relative;
   margin-left: 36px;
-  font-size: 12px;
+  font-size: clamp(0.6rem, 2vw, 0.9rem);
   font-weight: normal;
 }
 
@@ -254,20 +265,28 @@ input:focus:valid {
 
 .btn-submit,
 .btn-signup {
-  background: #FF001B;
-  display: block;
+  width: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: 0 auto;
+  padding: 12px 82px;
+  background: #FF001B;
+  border: 0;
   border-radius: 7px;
   font-size: 1rem;
-  padding: 12px 82px;
   color: #fff;
   cursor: pointer;
-  border: 0;
+  transition: transform 0.5s cubic-bezier(0.2, 0.5, 0.3, 2);
+}
+.btn-submit:hover,
+.btn-signup:hover {
+  transform: scale(1.2);
 }
 
 .text-label {
   font-weight: normal;
-  font-size: 16px;
+  font-size: clamp(0.8rem, 4vw, 1rem);
 }
 
 .submitok {
@@ -299,9 +318,15 @@ input:focus:valid {
 }
 .topnav__logo {
   float: left;
+  padding-right: 1rem;
+}
+.topnav__logo img {
+  width: 100%;
+  height: auto;
 }
 .topnav__navbar {
   float: right;
+  position: relative;
 }
 
 .topnav a {
@@ -311,9 +336,9 @@ input:focus:valid {
   text-align: center;
   padding: 12px 12px;
   margin: 5px;
+  font-size: clamp(0.7rem, 2vw, 1.5rem);
   text-decoration: none;
-  font-size: 20px;
-  font-family: Roboto, sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 .topnav a:hover {
   background-color: #FF001B;
@@ -333,7 +358,7 @@ input:focus:valid {
 /* custom select end */
 /* MAIN */
 .hero-section {
-  min-height: 93vh;
+  height: auto;
   border-radius: 10px;
   display: grid;
   grid-template-columns: repeat(12, 1fr); /*12 columns of the same width, 1fr = fraction of the available space */
@@ -365,7 +390,7 @@ input:focus:valid {
   z-index: 1;
 }
 .hero-section__content__headline {
-  font-size: 6rem;
+  font-size: clamp(4rem, 8vw, 6rem);
   font-weight: normal;
   white-space: nowrap;
 }
@@ -419,13 +444,13 @@ footer {
   padding-left: 2vw;
   padding-right: 2vw;
   margin: 0 20px;
-  font-family: "DM Sans", Arial, Helvetica, sans-serif;
+  font-family: "DM Sans", sans-serif;
 }
 
 .copyrights {
   color: #FF001B;
   padding: 0;
-  font-size: 1rem;
+  font-size: clamp(0.8rem, 3vw, 1rem);
   margin: 60px 0 30px;
   font-weight: bolder;
 }
@@ -454,13 +479,15 @@ footer {
   }
 }
 @media screen and (max-width: 540px) {
+  main {
+    margin: 0;
+  }
   .topnav a {
     display: none;
   }
   .topnav a.icon {
     float: right;
     display: block;
-    margin-top: -15px;
   }
 }
 /* custom select end */
@@ -473,6 +500,8 @@ footer {
     background: #fff;
     color: #000;
     padding: 20px;
+    min-width: auto;
+    max-width: 100%;
   }
   .hero-section__content::after {
     content: unset;
@@ -481,12 +510,12 @@ footer {
     display: none;
   }
   .hero-section__content__headline {
-    font-size: 4.5rem;
+    font-size: clamp(1.6rem, 8vw, 10rem);
     white-space: normal;
   }
   .hero-section__content__text {
     width: unset;
-    font-size: 1.5rem;
+    font-size: clamp(1rem, 3vw, 8rem);
   }
   .hero-section__img img {
     border-radius: 10px;
@@ -494,12 +523,13 @@ footer {
   }
   .hero-section > .btn-signup {
     display: block;
+    text-align: center;
     margin: 32px auto 10px;
-    padding: 12px 35px;
+    padding: 1rem 0;
+    font-size: clamp(0.8rem, 4vw, 1.5rem);
   }
   .copyrights {
     margin-top: 50px;
     text-align: center;
   }
-}
-/* ??????????????????????????????????????????????? *//*# sourceMappingURL=style.css.map */
+}/*# sourceMappingURL=style.css.map */
