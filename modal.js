@@ -18,13 +18,17 @@ function editNav() {
 
 // REGEX TOURNAMENT START ==========================================================
 
+
+
+
 function regexTournament(event) {
+  const target = event.target;
   // only numbers 0 to 9
-  event.target.value = event.target.value.replace([0 - 9], '');
+  target.value = target.value.replace([0 - 9], '');
 
   // maximum 2 numbers
-  if (event.target.value.length > 2) {
-    event.target.value = event.target.value.slice(0, 2);
+  if (target.value.length > 2) {
+    target.value = target.value.slice(0, 2);
   }
 }
 
@@ -79,58 +83,63 @@ function doIt(data) {
 
   //ERROR MESSAGES CONTENT DISPLAY START ================================================================
 
-  // After value entry for valueMissing
+  // Before and After value entry for valueMissing
   const allInputs = document.querySelectorAll('input[required]');
   Validator.fieldRequiredBeforeUserEntry(allInputs, error_message);
   Validator.fieldRequiredAfterUserEntry(error_message);
 
+
   //FIRSTNAME FIELD
-  //modal firstname error messages
   const firstname = document.getElementById('firstname');
-  Validator.elementsName(firstname, error_message);
+  // firstname.addEventListener('input', () => { Validator.elementsName(firstname, error_message) } )
+  Validator.elementsListenerName( firstname, error_message )
   hyphenFirstandLastNameManager(firstname);
 
 
   //LASTNAME FIELD 
-  //modal lastname error messages
   const lastname = document.getElementById('lastname');
+  lastname.addEventListener('input', () => { Validator.elementsName(lastname, error_message)})
   Validator.elementsName(lastname, error_message)
   hyphenFirstandLastNameManager(lastname);
 
 
   //EMAIL FIELD 
-  // modal email error message
   let emailInputs = document.querySelectorAll('input[type="email"]');
-  Validator.email(emailInputs, error_message);
-  Validator.emailIdentical(emailInputs, error_message);
+  emailInputs.forEach((emailInput) => {
+    emailInput.addEventListener('input', function (event) {
+      if(!Validator.email(emailInput, error_message)) event.stopPropagation()
+      if(!Validator.emailIdentical(emailInputs[0], emailInputs[1], error_message)) event.stopPropagation()
 
+    })
+  })
+  
 
   //BIRTHDATE FIELD 
-  //modal birthdate error message
   const birthdate = document.getElementById('birthdate');
-  Validator.validateElementsBirthdateAndTournament(birthdate);
-  Validator.isMajor(birthdate, error_message);
+  // birthdate.addEventListener('input', (event) => { Validator.elementBirthdate(birthdate, error_message)})
+  birthdate.addEventListener('input', function (event)  {
+    if (!Validator.elementBirthdate(birthdate, error_message)) event.stopPropagation()
+    if (!Validator.isMajor(birthdate, error_message)) event.stopPropagation()
+    console.log(birthdate.value)
+  })
+
 
   //TOURNAMENT FIELD 
-  //modal tournament error message
   const tournament = document.getElementById('tournament-quantity');
-  Validator.validateElementsBirthdateAndTournament(tournament);
+  tournament.addEventListener('input', () => { Validator.elementTournament(tournament)})
+  Validator.elementTournament(tournament)
+  
 
   // LOCATION FIELD
-  // modal location error message
   const checkboxes = document.querySelectorAll("input[name='location']");
   const invalidLocationBorderColor = document.querySelectorAll('.checkbox-label .checkbox-icon');
   const emptyLocationMessage = error_message;
-  let locChecked = false;
-  // Validator.cityLocation(checkboxes);
-  // Validator.validateLocation(checkboxes, invalidLocationBorderColor, emptyLocationMessage, locChecked);
+ 
   
   //TERMS AND CONDITIONS FIELD
   const terms = document.getElementById('checkbox1');
   const termsStyle = document.getElementById('terms-style');
   const emptyTermsMessage = error_message;
-  let termsChecked = false;
-
 
   //ERROR MESSAGES CONTENT DISPLAY END ==================================================================
 
@@ -138,119 +147,131 @@ function doIt(data) {
   
   //LOCATION CHECKBOX START =====================================================================
 
-  // checkboxes listenner
+  // location checkboxes listenner
   checkboxes.forEach((checkbox) => {
-    // console.log(checkboxes)
-    checkbox.addEventListener('click', validateLocation); //validateLocation erase the error message before submit (callback => validateLocation)
+    checkbox.addEventListener('click', () =>{
+      Validator.location (checkboxes, invalidLocationBorderColor, emptyLocationMessage)
+    }); 
   });
-
-  // location validation and error message display
-  function validateLocation() {
-    checkboxes.forEach((checkbox) => {
-      if (checkbox.checked) {
-        locChecked = true;
-      }
-    });
-    
-    if (locChecked) {
-      document.getElementById('location-error-message').innerHTML = '';
-      invalidLocationBorderColor.forEach((border) => {
-        border.style.border = '';
-      })
-
-    } else {
-      document.documentElement.style.setProperty('--primary-color', '#FF001B');
-      document.getElementById('location-error-message').innerHTML = emptyLocationMessage.empty_location;
-      invalidLocationBorderColor.forEach((border) => {
-        border.style.border = '2px solid var(--primary-color)';
-      })
-    }
-  }
   //LOCATION CHECKBOX END =====================================================================
 
 
 
   // TERMS AND CONDITIONS CHECKBOX START =====================================================================
 
-  //checkbox listenner
-  terms.addEventListener('click', validateTerms);
-    
   //terms and conditions validation and error message display
   function validateTerms () {
-    if(terms.checked){
-      termsChecked = true;
-    } else if (!terms.checked){ 
-      termsChecked = false;
-    }
-    // console.log(terms.checked)
-    
-    
-    if (termsChecked){
-      document.getElementById('terms-error-message').innerHTML = '';
-      termsStyle.style.border = '';
-      
-    } else {
+    if (!terms.checked) {
       document.documentElement.style.setProperty('--primary-color', '#FF001B');
       document.getElementById('terms-error-message').innerHTML = emptyTermsMessage.empty_terms;
       termsStyle.style.border = '2px solid var(--primary-color)';
+      return false
     }
+    
+    document.getElementById('terms-error-message').innerHTML = '';
+    termsStyle.style.border = '';
+    return true
   }
+
+  //terms checkbox listenner
+  terms.addEventListener('click', validateTerms);
+  
   // TERMS AND CONDITIONS CHECKBOX END =======================================================================
 
-  // let test = Validator.emailIdentical().strSource;
-  // console.log(test)
+  
 
 
   //SUBMIT MODAL FORM START ===========================================================
 
-  //modal submit validation form negative or positive  
+  //modal submit validation
 
   let formSub = document.getElementById('form-submit');
   
-  formSub.addEventListener('click', function (canSubmit) {
-
-    
-    if (firstname.value === '' || lastname.value === '' || emailInputs.value === '' || birthdate.value === '' || tournament.value === '') {
-
-    } else if (Validator.emailIdentical().strSource !== Validator.emailIdentical().strCopy) { 
-      // console.log(Validator.emailIdentical().strSource)
-
-      Validator.emailIdentical();
-      canSubmit.preventDefault();
-
-    }  else if (locChecked !== true ) {
-      validateLocation();
-      canSubmit.preventDefault();
-    
-    } else if (termsChecked !== true) {
-      validateTerms();
-      canSubmit.preventDefault();
-    
-    } else {
-      // modal submit validation message
-
-      // validation message display container
-      const myBody = document.querySelector("body");
-      const myDivContainer = document.createElement("div");
-      myBody.appendChild(myDivContainer);
-      myDivContainer.classList.add("submitok");
-      setTimeout(() => { myDivContainer.style.display = "none" }, 2000);
+  // for checkbox fields
+  const invalidateEvent = (event) => {
+    event.preventDefault()
+    event.stopPropagation()
+    return null
+  }
 
 
-      //validation message --> text message
-      const myDiv = document.createElement("div");
-      myDivContainer.appendChild(myDiv);
-      myDiv.classList.add("submitok__message");
-      myDiv.textContent = data.validation.submit_validation_message;
+  // for input fields 
+  const stopPropagation = (event) => {
+    event.stopPropagation()
+    return null
+  }
 
 
-      //delays the reloading of the dom after validation of the form
-      const form = document.querySelector('form');
-      form.addEventListener('submit', (event) => {
-        event.preventDefault();
-        setTimeout(() => { window.location.reload(); }, 2000);
-      });
+  formSub.addEventListener('click', function (event) {
+
+    //firstname fields validation
+    if (!Validator.elementsName(firstname, error_message)) {
+      return stopPropagation(event)
     }
+
+    //lastname fields validation
+    if (!Validator.elementsName(lastname, error_message)) {
+      return stopPropagation(event)
+    }
+
+    //email fields validation
+    let confirmMail = true
+    emailInputs.forEach((emailInput) => {
+      if (!Validator.email(emailInput, error_message)) {
+        confirmMail = false
+        return null
+      }
+    })
+    if (!confirmMail) 
+    return stopPropagation(event)
+
+    if (!Validator.emailIdentical(emailInputs[0], emailInputs[1], error_message)) 
+        return stopPropagation(event)
+
+    //birthdate field validation
+    if(!Validator.elementBirthdate(birthdate, error_message))
+    return stopPropagation(event)
+
+    if(!Validator.isMajor(birthdate, error_message))
+    return stopPropagation(event)
+
+    //tournament field validation
+    if (!Validator.elementTournament(tournament, error_message))
+      return stopPropagation(event)
+
+    // location field validation
+    if (!Validator.location (checkboxes, invalidLocationBorderColor, emptyLocationMessage)) {
+      return invalidateEvent(event)
+    }
+
+    // terms field validation
+    if (!validateTerms()) return invalidateEvent(event)
+    
+
+
+    // modal submit validation message
+
+    // validation message display container
+    const myBody = document.querySelector("body");
+    const myDivContainer = document.createElement("div");
+    myBody.appendChild(myDivContainer);
+    myDivContainer.classList.add("submitok");
+    setTimeout(() => { myDivContainer.style.display = "none" }, 2000);
+
+
+    //validation message --> text message
+    const myDiv = document.createElement("div");
+    myDivContainer.appendChild(myDiv);
+    myDiv.classList.add("submitok__message");
+    myDiv.textContent = data.validation.submit_validation_message;
+
+    //delays the reloading of the dom after validation of the form
+    const form = document.querySelector('form');
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      setTimeout(() => { window.location.reload(); }, 2000);
+    });
+
   });
 
   //SUBMIT MODAL FORM END ===========================================================
