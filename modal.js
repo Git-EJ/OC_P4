@@ -105,8 +105,6 @@ function doIt(data) {
   Validator.emailIdentical(emailInputs, error_message);
 
 
-
-
   //BIRTHDATE FIELD 
   //modal birthdate error message
   const birthdate = document.getElementById('birthdate');
@@ -132,8 +130,6 @@ function doIt(data) {
   const termsStyle = document.getElementById('terms-style');
   const emptyTermsMessage = error_message;
   let termsChecked = false;
-  console.log(termsChecked)
-  
 
 
   //ERROR MESSAGES CONTENT DISPLAY END ==================================================================
@@ -142,12 +138,13 @@ function doIt(data) {
   
   //LOCATION CHECKBOX START =====================================================================
 
-  //checkboxes listenner
+  // checkboxes listenner
   checkboxes.forEach((checkbox) => {
+    // console.log(checkboxes)
     checkbox.addEventListener('click', validateLocation); //validateLocation erase the error message before submit (callback => validateLocation)
   });
 
-  //location validation and error message display
+  // location validation and error message display
   function validateLocation() {
     checkboxes.forEach((checkbox) => {
       if (checkbox.checked) {
@@ -185,7 +182,7 @@ function doIt(data) {
     } else if (!terms.checked){ 
       termsChecked = false;
     }
-    console.log(terms.checked)
+    // console.log(terms.checked)
     
     
     if (termsChecked){
@@ -196,11 +193,12 @@ function doIt(data) {
       document.documentElement.style.setProperty('--primary-color', '#FF001B');
       document.getElementById('terms-error-message').innerHTML = emptyTermsMessage.empty_terms;
       termsStyle.style.border = '2px solid var(--primary-color)';
-      console.log(terms)
     }
   }
   // TERMS AND CONDITIONS CHECKBOX END =======================================================================
 
+  // let test = Validator.emailIdentical().strSource;
+  // console.log(test)
 
 
   //SUBMIT MODAL FORM START ===========================================================
@@ -211,19 +209,24 @@ function doIt(data) {
   
   formSub.addEventListener('click', function (canSubmit) {
 
-  validateLocation();
-  validateTerms();
-
+    
     if (firstname.value === '' || lastname.value === '' || emailInputs.value === '' || birthdate.value === '' || tournament.value === '') {
 
-    }  else if (locChecked != true || termsChecked != true) {
+    } else if (Validator.emailIdentical().strSource !== Validator.emailIdentical().strCopy) { 
+      // console.log(Validator.emailIdentical().strSource)
+
+      Validator.emailIdentical();
+      canSubmit.preventDefault();
+
+    }  else if (locChecked !== true ) {
+      validateLocation();
+      canSubmit.preventDefault();
+    
+    } else if (termsChecked !== true) {
+      validateTerms();
       canSubmit.preventDefault();
     
     } else {
-
-
-
-
       // modal submit validation message
 
       // validation message display container

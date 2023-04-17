@@ -18,6 +18,7 @@ const Validator = {
     document.addEventListener('input', function (event) {
       if (event.target.value === "") {
         event.target.setCustomValidity(entryError.required_field);
+        event.stopPropagation();
       }
     });
   },
@@ -72,52 +73,57 @@ const Validator = {
   },
 
   emailIdentical: (inputFieldNames, entryError) => {
-
     const elemSource = inputFieldNames[0]
     const elemCopy = inputFieldNames[1]
-
+    // console.log(elemSource.value)
+    // console.log(elemCopy.value)
+    
     const func = event => {
       const strSource = elemSource.value.toLowerCase().trim();
       const strCopy = elemCopy.value.toLowerCase().trim();
+      console.log(strSource)
+      console.log(strCopy)
+      
       if (strCopy !== strSource) {
         elemCopy.setCustomValidity(entryError.email_are_not_identical);
         event.stopPropagation();
+        
       } else {
         elemCopy.setCustomValidity("");
       }
     }
-
-
+    
     elemCopy.addEventListener('input', func)
     elemSource.addEventListener('input', func)
   },
+
   // VALIDATION OF THE EMAIL FIELDS END
+  
 
-
-
+  
   // VALIDATION OF THE BIRTHDATE AND TOURNAMENT FIELDS START
   validateElementsBirthdateAndTournament: (inputFieldName) => {
     inputFieldName.addEventListener('input', function () {
 
       const birthdateValue = document.getElementById('birthdate').value;
       const tournamentValue = document.getElementById('tournament-quantity').value;
-
+      
       if (birthdateValue.length > 0 || tournamentValue.length > 0) {  //without this condition, the error message is displayed when the field is empty or not empty
         inputFieldName.setCustomValidity("");
       }
     })
   },
   // VALIDATION OF THE BIRTHDATE AND TOURNAMENT FIELDS END
-
-
-
+  
+  
+  
   //BIRTHDATE MINORS NOT ALLOWED START
   isMajor: (inputFieldName, entryError) => {
     // retrieve today's date
     let todaysDate = new Date();
     document.getElementById('birthdate').setAttribute('max', todaysDate.toISOString().split('T')[0]); // set the max value in the html input type=date
-                                                                                                      // toISOString() returns a string in the format YYYY-MM-DD
-                                                                                                      // split('T') separate date and time
+    // toISOString() returns a string in the format YYYY-MM-DD
+    // split('T') separate date and time
     inputFieldName.addEventListener('input', (event) => {                                                                                                //[0] return the date without the time (first array element)
       const age = new Date(todaysDate - new Date(event.target.value).getTime()).getFullYear() - 1970
       
@@ -136,10 +142,55 @@ const Validator = {
     })
   },
   // BIRTHDATE MINORS NOT ALLOWED END 
-
+  
   
   // VALIDATION OF THE CITY FIELD START
-  // VALIDATION OF THE CITY FIELD END
-
-
-} // CONST VALIDATOR END
+  
+  // cityLocation: (checkboxes) => {
+    //   console.log(checkboxes)
+    //   checkboxes.forEach((checkbox) => {
+      //     checkbox.addEventListener('click', Validator.validateLocation); //validateLocation erase the error message before submit (callback => validateLocation)
+      //   });
+      // },
+      
+      // // location validation and error message display
+      // validateLocation: (checkboxes, invalidLocationBorderColor, emptyLocationMessage, locChecked) => {
+        //   checkboxes.forEach((checkbox) => {
+          //     if (checkbox.checked) {
+            //       locChecked = true;
+            //     } else {
+              //       locChecked = false;
+              //     }
+              //   });
+    
+  //   if (locChecked  === true) {
+    //     document.getElementById('location-error-message').innerHTML = '';
+    //     invalidLocationBorderColor.forEach((border) => {
+      //       border.style.border = '';
+      //     })
+      
+      //   } else {
+        //     document.documentElement.style.setProperty('--primary-color', '#FF001B');
+        //     document.getElementById('location-error-message').innerHTML = emptyLocationMessage.empty_location;
+        //     invalidLocationBorderColor.forEach((border) => {
+          //       border.style.border = '2px solid var(--primary-color)';
+          //     })
+          //   }
+          //   console.log(locChecked)
+          // },
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          // VALIDATION OF THE CITY FIELD END
+          
+          
+        } // CONST VALIDATOR END
+        
+      
