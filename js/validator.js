@@ -79,7 +79,7 @@ const Validator = {
     if (Validator.emptyField(inputFieldName)) { return false }
 
     const validity = inputFieldName.validity
-    if (validity.patternMismatch || validity.typeMismatch) { //impossible to ungroup because of the Html pattern for personalized message
+    if (validity.patternMismatch || validity.typeMismatch) {
       inputFieldName.setCustomValidity(entryError.email_format);
       return false
     }
@@ -114,7 +114,7 @@ const Validator = {
 
   
   // VALIDATION OF THE BIRTHDATE FIELDS START
-  elementBirthdate : (inputFieldName , entryError) => {
+  elementBirthdate : (inputFieldName) => {
     
     if (Validator.emptyField(inputFieldName)) { return false }
 
@@ -122,69 +122,55 @@ const Validator = {
     return true
   },
 
-
-
-  // VALIDATION OF THE BIRTHDATE FIELDS END
-
-
   
-  //BIRTHDATE MINORS NOT ALLOWED START
+
+  //birthdate minors not allowed start
   isMajor: (birthdate, entryError) => {
 
     // retrieve today's date
     let todaysDate = new Date();
     document.getElementById('birthdate').setAttribute('max', todaysDate.toISOString().split('T')[0]) // set the max value in the html input type=date
-                                                                                                      // toISOString() returns a string in the format YYYY-MM-DD
-                                                                                                      // split('T') separate date and time
-                                                                                                      //[0] return the date without the time (first array element)
+    // toISOString() returns a string in the format YYYY-MM-DD
+    // split('T') separate date and time
+    //[0] return the date without the time (first array element)
     let dateOfEvent = new Date('2023-09-23');
+    
+    
+    
+    const age = new Date(dateOfEvent - new Date(birthdate.value).getTime()).getFullYear() - 1970;
 
-
+    if (isNaN(age)) {
+      birthdate.setCustomValidity(entryError.date_error);
+      return false
       
-      const age = new Date(dateOfEvent - new Date(birthdate.value).getTime()).getFullYear() - 1970;
-      console.log(typeof age)
-      console.log(birthdate.value)
-      console.log(age)
+    } else if (age < 18) {
+       birthdate.setCustomValidity(entryError.minors_are_not_allowed);
+      return false
 
-      if (isNaN(age)) {
-        console.log("NaN", entryError.date_error);
-        birthdate.setCustomValidity(entryError.date_error);
-        return false
-
-      } else if (age < 18) {
-        console.log("<18");
-        birthdate.setCustomValidity(entryError.minors_are_not_allowed);
-        return false
-
-      } else {
-        console.log(">=18");
-        birthdate.setCustomValidity("");
-        return true
-      }
+    } else {
+      birthdate.setCustomValidity("");
+      return true
+    }
   },
-  // BIRTHDATE MINORS NOT ALLOWED END 
-  
-
-
-
-
-  // VALIDATION OF THE TOURNAMENT FIELDS START
-  elementTournament : (inputFieldName) => {
-
-    if (Validator.emptyField(inputFieldName)) { return false }
-
-    inputFieldName.setCustomValidity("");
-    return true
-  },
-  // VALIDATION OF THE TOURNAMENT FIELDS END
-  
-
-
-
-  // VALIDATION OF THE CITY FIELD START
-  // location validation and error message display
-  location : (checkboxes, invalidLocationBorderColor, emptyLocationMessage) => {
-    let locChecked = false;
+  // birthdate minors not allowed end
+  // VALIDATION OF THE BIRTHDATE FIELDS END
+    
+    
+    // VALIDATION OF THE TOURNAMENT FIELDS START
+    elementTournament : (inputFieldName) => {
+      
+      if (Validator.emptyField(inputFieldName)) { return false }
+      
+      inputFieldName.setCustomValidity("");
+      return true
+    },
+    // VALIDATION OF THE TOURNAMENT FIELDS END
+    
+    
+    // VALIDATION OF THE CITY FIELD START
+    // location validation and error message display
+    location : (checkboxes, invalidLocationBorderColor, emptyLocationMessage) => {
+      let locChecked = false;
 
     checkboxes.forEach((checkbox) => {
       if (checkbox.checked) {
@@ -205,13 +191,29 @@ const Validator = {
     invalidLocationBorderColor.forEach((border) => {
       border.style.border = '2px solid var(--primary-color)';
     })
-
     return false
-  }
+  },
   // VALIDATION OF THE CITY FIELD END
   
 
-          
+  // VALIDATION OF THE TERMS AND CONDITIONS FIELD START
+
+  //terms and conditions validation and error message display
+   elementTerm :(term, termStyle, emptyTermMessage) => {
+    if (term.checked) {
+      document.getElementById('term-error-message').innerHTML = '';
+      termStyle.style.border = '';
+      return true
+    }
+    
+    document.documentElement.style.setProperty('--primary-color', '#FF001B');
+    document.getElementById('term-error-message').innerHTML = emptyTermMessage.empty_term;
+    termStyle.style.border = '2px solid var(--primary-color)';
+    return false
+    },
+  // VALIDATION OF THE TERMS AND CONDITIONS FIELD END
+
+  
 } // CONST VALIDATOR END
         
       

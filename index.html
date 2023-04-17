@@ -73,42 +73,42 @@
             <div class="formData">
               <label for="firstname">Prénom</label>
               <br>
-              <input class="text-control" type="text" id="firstname" name="firstname" value="" minlength="2" maxlength='40' pattern="^[a-zA-ZÀ-ÿ][a-zA-ZÀ-ÿ\s\-]*[a-zA-ZÀ-ÿ]$" required>
+              <input class="text-control" type="text" id="firstname" name="firstname" value="ff" minlength="2" maxlength='40' pattern="^[a-zA-ZÀ-ÿ][a-zA-ZÀ-ÿ\s\-]*[a-zA-ZÀ-ÿ]$" required>
               <br>
             </div>
 
             <div class="formData">
               <label for="lastname">Nom</label>
               <br>
-              <input class="text-control" type="text" id="lastname" name="lastname" value="" minlength="2" maxlength='40' pattern="^[a-zA-ZÀ-ÿ][a-zA-ZÀ-ÿ\s\-]*[a-zA-ZÀ-ÿ]$" required>
+              <input class="text-control" type="text" id="lastname" name="lastname" value="ff" minlength="2" maxlength='40' pattern="^[a-zA-ZÀ-ÿ][a-zA-ZÀ-ÿ\s\-]*[a-zA-ZÀ-ÿ]$" required>
               <br>
             </div>
 
             <div class="formData">
               <label for="email">E-mail</label>
               <br>
-              <input class="text-control" type="email" id="email" name="email" placeholder="exemple@domaine.com" value="" pattern="^[\w.%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}$" required>
+              <input class="text-control" type="email" id="email" name="email" placeholder="exemple@domaine.com" value="toto@g.com" pattern="^[\w.%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}$" required>
               <br>
             </div>
 
             <div class="formData">
               <label for="email-confirmation"><i>E-mail - Confirmation</i></label>
               <br> 
-              <input class="text-control" type="email" id="email-confirmation" name="email-confirmation" placeholder="exemple@domaine.com" value="" pattern=^[\w.%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}$ required>
+              <input class="text-control" type="email" id="email-confirmation" name="email-confirmation" placeholder="exemple@domaine.com" value="toto@g.com" pattern=^[\w.%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}$ required>
               <br>
             </div>
 
             <div class="formData">
               <label for="birthdate">Date de naissance</label>
               <br>
-              <input class="text-control" type="date" id="birthdate" name="birthdate" value="" min="1923-01-01" max="2023-12-31" required>
+              <input class="text-control" type="date" id="birthdate" name="birthdate" value="1923-02-02" min="1923-01-01" max="2023-12-31" required>
               <br>
             </div>
 
             <div class="formData">
               <label for="tournament-quantity">À combien de tournois GameOn avez-vous déjà participé ?</label>
               <br>
-              <input type="number" class="text-control" id="tournament-quantity" name="tournament-quantity" value="" min="0" max="99" oninput="regexTournament(event)" required>
+              <input type="number" class="text-control" id="tournament-quantity" name="tournament-quantity" value="0" min="0" max="99" oninput="regexTournament(event)" required>
             </div>
 
             <p class="text-label">A quel tournoi souhaitez-vous participer cette année ?</p>
@@ -127,7 +127,7 @@
                 San Francisco
               </label>
 
-              <input class="checkbox-input" type="radio" id="location3" name="location" value="Seattle">
+              <input class="checkbox-input" type="radio" id="location3" name="location" value="Seattle" checked>
               <label class="checkbox-label" for="location3">
                 <span class="checkbox-icon"></span>
                 Seattle
@@ -162,7 +162,7 @@
                 J'ai lu et accepté les conditions d'utilisation.
               </label>
 
-              <div class="form-error-message terms-padding" id="terms-error-message"></div>
+              <div class="form-error-message terms-padding" id="term-error-message"></div>
 
               <input class="checkbox-input" type="checkbox" id="checkbox2">
               <label class="checkbox2-label" for="checkbox2">
@@ -190,7 +190,7 @@
   </footer>
 
   <script src="./js/validator.js"></script>
-  <script src="./modal.js"></script>
+  <script src="./script.js"></script>
 
 </body>
 

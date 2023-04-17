@@ -150,8 +150,9 @@
 
 
 footer {
-  padding-left: 2vw;
-  padding-right: 2vw;
+  display:flex;
+  align-items: center;
+  padding: 0 2vw;
   margin: 0 20px;
   font-family: $font-default;
 }
@@ -160,6 +161,5 @@ footer {
   color: $primary-color;
   padding: 0;
   font-size: clamp(0.8rem, 3vw, 1rem);
-  margin: 60px 0 30px;
   font-weight: bolder;
 }
