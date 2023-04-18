@@ -1,7 +1,6 @@
 // DISPLAY START ==========================================================
 
 // manages the display of the nav in low resolutions
-
 function editNav() {
   const x = document.getElementById("myTopnav");
   if (x.className === "topnav") {
@@ -15,6 +14,8 @@ function editNav() {
 
 
 // REGEX TOURNAMENT START ==========================================================
+
+// only numbers 0 to 9 into the tournament field
 function regexTournament(event) {
   const target = event.target;
   // only numbers 0 to 9
@@ -30,10 +31,10 @@ function regexTournament(event) {
 
 
 // MODAL FORM START =======================================================================================================================================
-
+// do it when the page content.json is loaded
 function doIt(data) {
 
-  const error_message = data.error;
+  const error_message = data.error; // error messages content from content.json
 
   // LAUNCH & CLOSE MODAL FORM START
 
@@ -56,7 +57,7 @@ function doIt(data) {
 
   //INPUT FIELD MANAGEMENT START 
 
-  // Hyphen management for first and last name fields
+  // Hyphen management for first and last name fields, not more than one hyphen
   function hyphenFirstandLastNameManager(inputFieldName) {
     inputFieldName.addEventListener('input', (event) => {
       let name = event.target.value
@@ -68,7 +69,6 @@ function doIt(data) {
       }
     })
   }
-
   // INPUT FIELD MANAGEMENT END ==========================================================
 
 
@@ -84,7 +84,6 @@ function doIt(data) {
 
   //FIRSTNAME FIELD
   const firstname = document.getElementById('firstname');
-  // firstname.addEventListener('input', () => { Validator.elementsName(firstname, error_message) } )
   Validator.elementsListenerName( firstname, error_message )
   hyphenFirstandLastNameManager(firstname);
 
@@ -102,7 +101,6 @@ function doIt(data) {
     emailInput.addEventListener('input', function (event) {
       if(!Validator.email(emailInput, error_message)) event.stopPropagation()
       if(!Validator.emailIdentical(emailInputs[0], emailInputs[1], error_message)) event.stopPropagation()
-
     })
   })
   
@@ -140,7 +138,7 @@ function doIt(data) {
   // location checkboxes listenner
   checkboxes.forEach((checkbox) => {
     checkbox.addEventListener('click', () =>{
-      Validator.location (checkboxes, invalidLocationBorderColor, emptyLocationMessage)
+      Validator.elementLocation (checkboxes, invalidLocationBorderColor, emptyLocationMessage)
     }); 
   });
   //LOCATION CHECKBOX END =====================================================================
@@ -162,13 +160,12 @@ function doIt(data) {
 
   let formSub = document.getElementById('form-submit');
   
-  // for checkbox fields
+  // for checkbox
   const invalidateEvent = (event) => {
     event.preventDefault()
     event.stopPropagation()
     return null
   }
-
 
   // for input fields 
   const stopPropagation = (event) => {
@@ -216,14 +213,13 @@ function doIt(data) {
       return stopPropagation(event)
 
     // location field validation
-    if (!Validator.location (checkboxes, invalidLocationBorderColor, emptyLocationMessage)) 
+    if (!Validator.elementLocation (checkboxes, invalidLocationBorderColor, emptyLocationMessage)) 
       return invalidateEvent(event)
     
 
     // terms field validation
     if (!Validator.elementTerm(term, termStyle, emptyTermMessage)) 
       return invalidateEvent(event)
-    
     
 
 
@@ -258,7 +254,7 @@ function doIt(data) {
   //DEV START
 
   //modal automatic spawn (simulates a click automatically)
-  // document.querySelector('.btn-signup.modal-btn').click();
+  document.querySelector('.btn-signup.modal-btn').click();
 
   //DEV END
 
@@ -272,6 +268,7 @@ function doIt(data) {
 //CONTENT.JSON START ==========================================================
 
 // recovery of error or validation messages in content.json
+// make sure the json file is loaded before load the do it function (Methods fetch and then)
 window.onload = async () => {
   fetch('./content.json')
     .then(response => response.json())
