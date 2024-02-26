@@ -159,7 +159,6 @@ const Validator = {
   
 
   //birthdate minors not allowed start
-
   /** isMajor
    * @param {HTMLElement} birthdate dom element for birthdate field
    * @param {Object} entryError message to display on error
@@ -171,12 +170,23 @@ const Validator = {
 
     // retrieve today's date
     let todaysDate = new Date();
-    document.getElementById('birthdate').setAttribute('max', todaysDate.toISOString().split('T')[0]) // set the max value in the html input type=date
-                                                                                                    // toISOString() returns a string in the format YYYY-MM-DD
-                                                                                                    // split('T') separate date and time
-                                                                                                    //[0] return the date without the time (first array element)
+    document.getElementById('birthdate').setAttribute('max', todaysDate.toISOString().split('T')[0])    // set the max value in the html input type=date
+    //                                                                                                  // toISOString() returns a string in the format YYYY-MM-DD
+    //                                                                                                  // split('T') separate date and time
+    //                                                                                                  //[0] return the date without the time (first array element)
+    // console.log(typeof todaysDate)
+    // console.log(todaysDate)
+    // console.log(todaysDate.toISOString())
+    // console.log(todaysDate.toISOString().split('T'));
+    // console.log(todaysDate.toISOString().split('T')[0]);
+    
     let dateOfEvent = new Date('2023-09-23');
     const age = new Date(dateOfEvent - new Date(birthdate.value).getTime()).getFullYear() - 1970;
+
+    // console.log(new Date(birthdate.value).getTime())
+    // console.log(new Date(dateOfEvent - new Date(birthdate.value).getTime()).getFullYear())
+    // console.log(new Date(dateOfEvent - new Date(birthdate.value).getTime()).getFullYear() - 1970)
+    // console.log(age)
 
     if (isNaN(age)) { // if the date is not valid like 31/04/2021 (only 30 days in april)
       birthdate.setCustomValidity(entryError.date_error);

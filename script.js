@@ -264,7 +264,6 @@ function doIt(data) {
 
 
 
-
 //CONTENT.JSON START ==========================================================
 
 // recovery of error or validation messages in content.json
