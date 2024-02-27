@@ -39,3 +39,16 @@
     - date entry cannot be greater than today's date
     - add an event date
     - age > 18, at the date of event for participate
+
+
+<strong>Install dependencies:</strong>
+
+```
+npm i
+```
+
+<strong>run sass</strong>
+
+```
+npm run sass
+```
