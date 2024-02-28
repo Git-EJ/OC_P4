@@ -52,3 +52,11 @@ npm i
 ```
 npm run sass
 ```
+
+<strong>Screenshot:</strong>
+
+<div align='center'>
+
+ <img src="./img/screenshot/screenshot_gameon-form.png" alt="GameOn Modal form screenshot" title="GameOn Modal form screenshot" width="auto" height="auto"/>
+ 
+</div>
